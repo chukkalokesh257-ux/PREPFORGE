@@ -11,7 +11,7 @@
 <body>
     <div class="app-container">
         <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="prepforgeSidebar">
             <div>
                 <div class="sidebar-header">
                     <div class="brand-wrapper">
@@ -127,8 +127,12 @@
         </aside>
 
         <!-- MAIN WRAPPER -->
+        <div class="sidebar-backdrop" aria-hidden="true"></div>
         <div class="main-wrapper">
             <header class="top-header">
+                <button class="sidebar-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="prepforgeSidebar">
+                    <span></span><span></span><span></span>
+                </button>
                 <div class="search-container">
                     <div class="search-input-wrapper">
                         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -232,6 +236,7 @@
     <script src="../javascript/state.js"></script>
     <script src="../javascript/coding-data.js"></script>
     <script src="../javascript/code-runner.js"></script>
+    <script src="../javascript/auth.js"></script>
     <script src="../javascript/app.js"></script>
 </body>
 </html>

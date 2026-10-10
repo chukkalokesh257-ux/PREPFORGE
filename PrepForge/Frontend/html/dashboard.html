@@ -11,7 +11,7 @@
 <body>
     <div class="app-container">
         <!-- 1. LEFT SIDEBAR (Dark Navy Professional SaaS Layout) -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="prepforgeSidebar">
             <div>
                 <!-- Brand Header -->
                 <div class="sidebar-header">
@@ -132,9 +132,13 @@
         </aside>
 
         <!-- 2. MAIN WRAPPER (FULL WIDTH - NO RIGHT COLUMN) -->
+        <div class="sidebar-backdrop" aria-hidden="true"></div>
         <div class="main-wrapper">
             <!-- Top Header -->
             <header class="top-header">
+                <button class="sidebar-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="prepforgeSidebar">
+                    <span></span><span></span><span></span>
+                </button>
                 <!-- Search Bar -->
                 <div class="search-container">
                     <div class="search-input-wrapper">
@@ -213,7 +217,7 @@
                 <section class="hero-banner">
                     <div class="hero-content">
                         <h1 class="hero-title">
-                            Good Morning, Lokesh! <span class="hero-wave">👋</span>
+                            Good Morning, <span data-user-greeting>Lokesh</span>! <span class="hero-wave">👋</span>
                         </h1>
                         <p class="hero-subtitle">
                             Your preparation today builds your placement success tomorrow.
@@ -541,6 +545,7 @@
     <script src="../javascript/data.js"></script>
     <script src="../javascript/state.js"></script>
     <script src="../javascript/coding-data.js"></script>
+    <script src="../javascript/auth.js"></script>
     <script src="../javascript/app.js"></script>
 </body>
 </html>

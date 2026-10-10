@@ -37,6 +37,31 @@ function initApp() {
    ========================================================================== */
 
 function setupSidebarNavigation() {
+    const appContainer = document.querySelector(".app-container");
+    const sidebarToggle = document.querySelector(".sidebar-toggle");
+    const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
+    if (appContainer && sidebarToggle) {
+        sidebarToggle.addEventListener("click", () => {
+            const isMobile = window.matchMedia("(max-width: 900px)").matches;
+            if (isMobile) {
+                appContainer.classList.toggle("sidebar-open");
+                sidebarToggle.setAttribute("aria-expanded", String(appContainer.classList.contains("sidebar-open")));
+            } else {
+                appContainer.classList.toggle("sidebar-collapsed");
+                sidebarToggle.setAttribute("aria-expanded", String(!appContainer.classList.contains("sidebar-collapsed")));
+            }
+        });
+        if (sidebarBackdrop) sidebarBackdrop.addEventListener("click", () => {
+            appContainer.classList.remove("sidebar-open");
+            sidebarToggle.setAttribute("aria-expanded", "false");
+        });
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                appContainer.classList.remove("sidebar-open");
+                sidebarToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+    }
     // Highlight current page in sidebar
     const currentPath = window.location.pathname.toLowerCase();
     const navItems = document.querySelectorAll(".sidebar-nav .nav-item");
@@ -54,8 +79,11 @@ function setupSidebarNavigation() {
         logoutBtn.addEventListener("click", (e) => {
             e.preventDefault();
             if (confirm("Are you sure you want to log out of PrepForge?")) {
-                alert("You have successfully logged out. (Session reset demo)");
-                window.location.href = "dashboard.html";
+                if (window.PrepForgeAuth) {
+                    window.PrepForgeAuth.logout();
+                } else {
+                    window.location.href = "login.html";
+                }
             }
         });
     }

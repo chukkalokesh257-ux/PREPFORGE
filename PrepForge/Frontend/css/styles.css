@@ -694,3 +694,29 @@ button {
         padding: 16px;
     }
 }
+
+
+/* ==========================================================================
+   Hamburger sidebar navigation
+   ========================================================================== */
+.sidebar-toggle{width:40px;height:40px;flex:0 0 40px;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid var(--border-color);border-radius:11px;background:#fff;color:var(--text-primary);transition:var(--transition);z-index:120}
+.sidebar-toggle:hover{background:var(--bg-card-subtle);border-color:#c7d2fe}
+.sidebar-toggle span{display:block;width:18px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s,opacity .2s}
+.top-header{gap:14px}
+.sidebar-backdrop{display:none}
+.app-container.sidebar-collapsed .sidebar{display:none}
+.app-container.sidebar-collapsed .main-wrapper{width:100%;min-width:0}
+@media(max-width:900px){
+ .sidebar{position:fixed;left:0;top:0;bottom:0;height:100dvh;transform:translateX(-105%);transition:transform .25s ease;z-index:300;box-shadow:16px 0 40px rgba(15,23,42,.18)}
+ .app-container.sidebar-open .sidebar{transform:translateX(0)}
+ .app-container.sidebar-open .sidebar-backdrop{display:block;position:fixed;inset:0;background:rgba(15,23,42,.48);z-index:250}
+ .app-container.sidebar-collapsed .sidebar{display:flex;transform:translateX(-105%)}
+ .app-container.sidebar-collapsed.sidebar-open .sidebar{transform:translateX(0)}
+ .app-container.sidebar-collapsed .sidebar-backdrop{display:none}
+ .app-container.sidebar-collapsed.sidebar-open .sidebar-backdrop{display:block}
+ .sidebar-toggle{position:relative}
+}
+@media(min-width:901px){
+ .app-container.sidebar-collapsed .sidebar{display:none}
+ .app-container.sidebar-collapsed .sidebar-backdrop{display:none}
+}
