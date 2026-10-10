@@ -1,0 +1,635 @@
+/**
+ * PrepForge - Placement Training & Assessment Platform
+ * LeetCode-Style Interactive Coding Arena Styling
+ * Dark IDE Aesthetic, Line Number Gutter, Responsive Split Pane & Console
+ */
+
+:root {
+    --editor-bg: #1E1E2E;
+    --editor-sidebar-bg: #181825;
+    --editor-gutter-bg: #1E1E2E;
+    --editor-gutter-color: #6C7086;
+    --editor-text: #CDD6F4;
+    --editor-border: #313244;
+    --editor-accent: #89B4FA;
+    --editor-green: #A6E3A1;
+    --editor-red: #F38BA8;
+    --editor-yellow: #F9E2AF;
+    --editor-peach: #FAB387;
+    --status-accepted: #10B981;
+    --status-wrong: #EF4444;
+    --status-error: #F59E0B;
+}
+
+/* Base Coding Arena Wrapper */
+.coding-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background: #0F172A;
+    color: #F8FAFC;
+    font-family: var(--font-sans);
+}
+
+/* Top Navbar */
+.coding-navbar {
+    height: 52px;
+    background: #1E293B;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.coding-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.coding-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.coding-logo svg {
+    color: var(--primary);
+}
+
+.coding-problem-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #0F172A;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #334155;
+}
+
+.coding-problem-select {
+    background: transparent;
+    color: #F8FAFC;
+    border: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    max-width: 240px;
+}
+
+.coding-problem-select option {
+    background: #1E293B;
+    color: #F8FAFC;
+}
+
+.coding-nav-btn {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.coding-nav-btn:hover {
+    color: #FFFFFF;
+    background: #334155;
+}
+
+.coding-nav-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.coding-run-btn {
+    background: #334155;
+    color: #F8FAFC;
+    border: 1px solid #475569;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-fast);
+}
+
+.coding-run-btn:hover {
+    background: #475569;
+    color: #FFFFFF;
+}
+
+.coding-submit-btn {
+    background: #059669;
+    color: #FFFFFF;
+    border: 1px solid #10B981;
+    padding: 6px 18px;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+    transition: var(--transition-fast);
+}
+
+.coding-submit-btn:hover {
+    background: #10B981;
+    transform: translateY(-1px);
+}
+
+.coding-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.coding-exit-btn {
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    transition: var(--transition-fast);
+}
+
+.coding-exit-btn:hover {
+    color: #FFFFFF;
+    background: #334155;
+}
+
+/* Main Split Workspace */
+.coding-workspace {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    flex: 1;
+    height: calc(100vh - 52px);
+    overflow: hidden;
+}
+
+/* Left Pane: Problem Details */
+.problem-pane {
+    background: #0F172A;
+    border-right: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.problem-pane-header {
+    padding: 12px 18px;
+    border-bottom: 1px solid #1E293B;
+    background: #1E293B;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.problem-tab-btn {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-fast);
+}
+
+.problem-tab-btn.active {
+    color: #FFFFFF;
+    background: #334155;
+}
+
+.problem-tab-btn:hover:not(.active) {
+    color: #CBD5E1;
+}
+
+.problem-pane-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 #0F172A;
+}
+
+.problem-header-wrap {
+    margin-bottom: 20px;
+}
+
+.problem-title-h1 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #F8FAFC;
+    margin-bottom: 12px;
+}
+
+.problem-meta-badges {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.badge-difficulty-easy {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-difficulty-medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: #FBBF24;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-difficulty-hard {
+    background: rgba(239, 68, 68, 0.15);
+    color: #F87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.problem-company-tags {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.company-pill-tag {
+    background: #1E293B;
+    color: #94A3B8;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #334155;
+}
+
+.problem-description-content {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #CBD5E1;
+}
+
+.problem-description-content code {
+    background: #1E293B;
+    color: #F1F5F9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.85em;
+    border: 1px solid #334155;
+}
+
+.example-card {
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.example-title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+.example-io-row {
+    margin-bottom: 8px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+.example-io-label {
+    color: #64748B;
+    font-weight: 600;
+}
+
+.example-io-val {
+    color: #F8FAFC;
+}
+
+.constraints-box {
+    margin-top: 24px;
+    background: #020617;
+    border: 1px solid #1E293B;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.constraints-title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #94A3B8;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.constraints-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #CBD5E1;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+/* Right Pane: IDE & Runner */
+.ide-pane {
+    background: #111827;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Editor Toolbar */
+.editor-toolbar {
+    height: 42px;
+    background: #1E293B;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex-shrink: 0;
+}
+
+.editor-lang-select {
+    background: #0F172A;
+    color: #F8FAFC;
+    border: 1px solid #334155;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+.editor-tools-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.editor-tool-btn {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    cursor: pointer;
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+.editor-tool-btn:hover {
+    color: #FFFFFF;
+    background: #334155;
+}
+
+/* Editor Wrapper */
+.editor-main-wrap {
+    flex: 1;
+    display: flex;
+    position: relative;
+    background: var(--editor-bg);
+    overflow: hidden;
+}
+
+.editor-gutter {
+    width: 48px;
+    background: var(--editor-gutter-bg);
+    border-right: 1px solid var(--editor-border);
+    color: var(--editor-gutter-color);
+    padding: 14px 8px 14px 0;
+    text-align: right;
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 20px;
+    user-select: none;
+    overflow: hidden;
+}
+
+.editor-textarea {
+    flex: 1;
+    background: transparent;
+    color: var(--editor-text);
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 20px;
+    resize: none;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    tab-size: 4;
+}
+
+/* Bottom Console Drawer */
+.console-drawer {
+    background: #1E293B;
+    border-top: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    height: 240px;
+    flex-shrink: 0;
+    transition: height 0.2s ease;
+}
+
+.console-drawer.collapsed {
+    height: 38px;
+}
+
+.console-header {
+    height: 38px;
+    background: #0F172A;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex-shrink: 0;
+}
+
+.console-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.console-tab-btn {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+.console-tab-btn.active {
+    color: #FFFFFF;
+    background: #334155;
+}
+
+.console-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 18px;
+    background: #1E293B;
+}
+
+/* Testcase Pills */
+.testcase-pills {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.case-pill {
+    background: #0F172A;
+    border: 1px solid #334155;
+    color: #94A3B8;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.case-pill.active {
+    background: #334155;
+    color: #FFFFFF;
+    border-color: #64748B;
+}
+
+.case-io-block {
+    background: #0F172A;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.82rem;
+}
+
+.case-io-block label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748B;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+/* Test Result View */
+.result-status-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.status-accepted-banner {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34D399;
+}
+
+.status-wrong-banner {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #F87171;
+}
+
+.status-error-banner {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #FBBF24;
+}
+
+.result-status-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.result-runtime-meta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94A3B8;
+}
+
+.stdout-console-box {
+    background: #020617;
+    border: 1px solid #1E293B;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.78rem;
+    color: #94A3B8;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .coding-workspace {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}

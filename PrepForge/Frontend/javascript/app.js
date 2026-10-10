@@ -457,12 +457,14 @@ function initCompaniesPage() {
             return;
         }
 
-        grid.innerHTML = filtered.map(c => `
+        grid.innerHTML = filtered.map(c => {
+            const logoSvg = window.PREPFORGE_DATA?.companyLogos?.[c.id] || `<span style="font-weight: 700; color: #4338CA;">${c.name.slice(0, 2)}</span>`;
+            return `
             <div class="company-card">
                 <div>
                     <div class="company-card-header">
                         <div class="company-brand-left">
-                            <div class="company-logo">${c.name.slice(0, 2)}</div>
+                            <div class="company-logo">${logoSvg}</div>
                             <div class="company-name-wrap">
                                 <span class="company-card-title">${c.name}</span>
                                 <span class="company-card-subtitle">${c.fullName}</span>
@@ -504,12 +506,18 @@ function initCompaniesPage() {
                         <span class="difficulty-dot ${c.difficulty.toLowerCase()}"></span>
                         <span>${c.difficulty} Difficulty</span>
                     </div>
-                    <button class="btn-view-details" onclick="openCompanyModal('${c.id}')">
-                        View Details →
-                    </button>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 0.78rem;" onclick="openCompanyModal('${c.id}')" title="Quick Overview">
+                            Preview
+                        </button>
+                        <a href="companies/${c.id}.html" class="btn-view-details" style="text-decoration: none; display: inline-flex; align-items: center;">
+                            Details →
+                        </a>
+                    </div>
                 </div>
             </div>
-        `).join("");
+        `;
+        }).join("");
     }
 
     filterPills.forEach(pill => {
@@ -631,16 +639,21 @@ function initTrainingPage() {
                     <div class="track-progress-bar-fill" style="width: ${track.progress}%; background-color: ${track.accentColor};"></div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 20px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; margin-top: 20px;">
                     ${track.topics.map(topic => `
-                        <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${topic.completed ? '#10B981' : '#CBD5E1'};"></span>
-                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary);">${topic.name}</span>
+                        <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${topic.completed ? '#10B981' : '#CBD5E1'}; flex-shrink: 0;"></span>
+                                <span style="font-size: 0.84rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${topic.name}">${topic.name}</span>
                             </div>
-                            <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.74rem;" onclick="window.location.href='practice.html?domain=${encodeURIComponent(track.name)}'">
-                                ${topic.completed ? "Revise" : "Start"}
-                            </button>
+                            <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+                                <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem; white-space: nowrap;" onclick="openTopicLesson('${topic.id}', '${topic.name.replace(/'/g, "\\'")}', '${track.fullName.replace(/'/g, "\\'")}')" title="Learn theory, formulas & worked examples">
+                                    Learn & Examples 📖
+                                </button>
+                                <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.72rem; white-space: nowrap;" onclick="window.location.href='practice.html?domain=${encodeURIComponent(track.name)}'" title="Do practice problems">
+                                    Practice ✍️
+                                </button>
+                            </div>
                         </div>
                     `).join("")}
                 </div>
@@ -648,8 +661,125 @@ function initTrainingPage() {
         `).join("");
     }
 
+    // Modal backdrop click close
+    const topicModal = document.getElementById("topicLessonModal");
+    if (topicModal) {
+        topicModal.addEventListener("click", (e) => {
+            if (e.target === topicModal) {
+                topicModal.classList.remove("show");
+            }
+        });
+    }
+
     renderTrainingContent();
 }
+
+function openTopicLesson(topicId, topicName, domainName) {
+    const modal = document.getElementById("topicLessonModal");
+    if (!modal) {
+        window.location.href = `practice.html?domain=${encodeURIComponent(domainName || 'all')}`;
+        return;
+    }
+
+    const lessons = window.PREPFORGE_DATA?.topicLessons || {};
+    let lesson = lessons[topicId];
+
+    if (!lesson) {
+        // Find by title match
+        const matchedKey = Object.keys(lessons).find(k => lessons[k].title.toLowerCase() === (topicName || "").toLowerCase());
+        if (matchedKey) lesson = lessons[matchedKey];
+    }
+
+    if (!lesson) {
+        // Generate tailored placement curriculum lesson
+        lesson = {
+            title: topicName || "Placement Core Concept",
+            domain: domainName || "Core Placement Topic",
+            concept: `Master the foundational theory, standard shortcut principles, and edge cases for "${topicName}". In technical campus drives and aptitude rounds, recruiters evaluate how efficiently you identify the core pattern and eliminate distractor options under timed pressure.`,
+            formulas: [
+                `Primary rule: Standardize problem variables and express equations in standard canonical form.`,
+                `Time-saver shortcut: Check boundary conditions and unit constraints before full evaluation.`,
+                `Complexity benchmark: Aim to identify the solution path in under 30 seconds.`
+            ],
+            example1: {
+                problem: `Foundation Example on ${topicName}:\nGiven a typical placement assessment prompt on "${topicName}", determine the standard method to solve with zero calculation error.`,
+                solution: `Step 1: Write down the known parameters and what needs to be determined.\nStep 2: Apply the governing rule of ${topicName} directly without extraneous substitutions.\nStep 3: Simplify systematically using cross-multiplication or algebraic factoring.\nStep 4: Verify with choice options.\nConclusion: The derived value matches the primary answer option.`
+            },
+            example2: {
+                problem: `Placement Interview PYQ on ${topicName}:\nHow do top recruiters (e.g. TCS, Infosys, Amazon) twist questions on "${topicName}" to test high-performing candidates?`,
+                solution: `Step 1: Interviewers typically introduce conflicting edge cases or non-trivial constraints.\nStep 2: Discard naive brute-force assumptions immediately.\nStep 3: Solve using optimal logarithmic/linear steps or ratio elimination.\nStep 4: State any boundary condition assumptions clearly to the interviewer.\nConclusion: Correctly structured answer guarantees maximum marks.`
+            }
+        };
+    }
+
+    const titleEl = document.getElementById("lessonTopicTitle");
+    if (titleEl) titleEl.textContent = lesson.title || topicName;
+
+    const badgeEl = document.getElementById("lessonDomainBadge");
+    if (badgeEl) badgeEl.textContent = lesson.domain || domainName;
+
+    const whatToLearnSec = document.getElementById("lessonWhatToLearnSection");
+    const whatToLearnEl = document.getElementById("lessonWhatToLearn");
+    if (whatToLearnEl) {
+        if (lesson.whatToLearn) {
+            whatToLearnEl.textContent = lesson.whatToLearn;
+            if (whatToLearnSec) whatToLearnSec.style.display = "block";
+        } else {
+            if (whatToLearnSec) whatToLearnSec.style.display = "none";
+        }
+    }
+
+    const conceptEl = document.getElementById("lessonConceptText");
+    if (conceptEl) conceptEl.textContent = lesson.concept;
+
+    const formulasSection = document.getElementById("lessonFormulasSection");
+    const formulasList = document.getElementById("lessonFormulasList");
+    if (formulasList) {
+        if (lesson.formulas && lesson.formulas.length > 0) {
+            if (formulasSection) formulasSection.style.display = "block";
+            formulasList.innerHTML = lesson.formulas.map(f => `
+                <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.85rem; color: #166534; font-weight: 500;">
+                    • ${f}
+                </div>
+            `).join("");
+        } else {
+            if (formulasSection) formulasSection.style.display = "none";
+        }
+    }
+
+    const ex1Prob = document.getElementById("lessonEx1Problem");
+    if (ex1Prob) ex1Prob.textContent = lesson.example1?.problem || "Example problem details";
+
+    const ex1Sol = document.getElementById("lessonEx1Solution");
+    if (ex1Sol) ex1Sol.textContent = lesson.example1?.solution || "Step-by-step solution";
+
+    const ex2Prob = document.getElementById("lessonEx2Problem");
+    if (ex2Prob) ex2Prob.textContent = lesson.example2?.problem || "Interview problem details";
+
+    const ex2Sol = document.getElementById("lessonEx2Solution");
+    if (ex2Sol) ex2Sol.textContent = lesson.example2?.solution || "Step-by-step solution";
+
+    const practiceBtn = document.getElementById("btnLessonGoPractice");
+    if (practiceBtn) {
+        practiceBtn.onclick = () => {
+            modal.classList.remove("show");
+            const domainKey = (lesson.domain || domainName || "").toLowerCase();
+            let targetDomain = "all";
+            if (domainKey.includes("aptitude")) targetDomain = "Aptitude";
+            else if (domainKey.includes("reasoning")) targetDomain = "Reasoning";
+            else if (domainKey.includes("verbal")) targetDomain = "Verbal";
+            else if (domainKey.includes("coding") || domainKey.includes("dsa")) targetDomain = "Coding";
+            else if (domainKey.includes("sql")) targetDomain = "SQL";
+            else if (domainKey.includes("dbms")) targetDomain = "DBMS";
+
+            window.location.href = `practice.html?domain=${targetDomain}`;
+        };
+    }
+
+    modal.classList.add("show");
+}
+
+window.openTopicLesson = openTopicLesson;
 
 /* ==========================================================================
    Practice Page Logic (Question Bank & Instant Verification)
@@ -721,17 +851,94 @@ function initPracticePage() {
             return;
         }
 
-        questionsContainer.innerHTML = filtered.map((q, idx) => {
+        // Compute live practice statistics for this filtered set
+        const totalCount = filtered.length;
+        const solvedQuestions = filtered.filter(q => window.PrepForgeState?.isQuestionCompleted(q.id));
+        const solvedCount = solvedQuestions.length;
+        const correctCount = filtered.filter(q => window.PrepForgeState?.getQuestionRecord(q.id)?.isCorrect).length;
+        const accuracyRate = solvedCount > 0 ? Math.round((correctCount / solvedCount) * 100) : 0;
+
+        const statsBarHtml = `
+            <div class="card" style="padding: 18px 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);">
+                <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+                    <div>
+                        <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Available Problems</div>
+                        <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin-top: 2px;" id="practiceStatsTotal">${totalCount} Questions</div>
+                    </div>
+                    <div style="border-left: 1px solid var(--border-color); padding-left: 24px;">
+                        <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Problems Solved</div>
+                        <div style="font-size: 1.25rem; font-weight: 800; color: #4F46E5; margin-top: 2px;" id="practiceStatsSolved">${solvedCount} / ${totalCount}</div>
+                    </div>
+                    <div style="border-left: 1px solid var(--border-color); padding-left: 24px;">
+                        <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Practice Accuracy</div>
+                        <div style="font-size: 1.25rem; font-weight: 800; color: #059669; margin-top: 2px;" id="practiceStatsAccuracy">${accuracyRate}%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;" onclick="resetPracticeProgress()">
+                        Reset Solved State ↺
+                    </button>
+                    <button class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem;" onclick="window.location.href='mock-tests.html'">
+                        Timed Mock Test ⏱️
+                    </button>
+                </div>
+            </div>
+        `;
+
+        const showLeetCodeBanner = selectedDomain === "all" || selectedDomain.toLowerCase().includes("coding");
+        const leetCodeBannerHtml = showLeetCodeBanner ? `
+            <div class="card" style="padding: 20px 24px; margin-bottom: 24px; background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border: 1px solid #334155; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; color: #FFFFFF;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #38BDF8; flex-shrink: 0;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.05rem; font-weight: 800; color: #F8FAFC;">PrepForge LeetCode Code Arena</span>
+                            <span class="badge" style="background: #10B981; color: #FFFFFF; font-weight: 700; font-size: 0.72rem;">LIVE COMPILER</span>
+                        </div>
+                        <div style="font-size: 0.84rem; color: #94A3B8; margin-top: 4px;">
+                            Write, run, and submit actual code with custom test cases, live execution feedback, and automated edge-case grading.
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <a href="coding.html" class="btn" style="background: #059669; color: #FFFFFF; border: 1px solid #10B981; font-weight: 700; padding: 8px 18px; font-size: 0.86rem; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);">
+                        <span>Launch Code Arena →</span>
+                    </a>
+                </div>
+            </div>
+        ` : '';
+
+        const questionsListHtml = filtered.map((q, idx) => {
             const completedRecord = window.PrepForgeState?.getQuestionRecord(q.id);
+            const isCompleted = !!completedRecord;
+            const isCorrect = completedRecord ? completedRecord.isCorrect : false;
+            const chosenOption = completedRecord ? completedRecord.selectedOption : null;
+            const isCodingDomain = q.domain.toLowerCase().includes("coding");
+
             return `
                 <div class="card" style="margin-bottom: 24px; padding: 26px;" id="question-card-${q.id}">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                             <span class="question-domain-tag">${q.domain}</span>
                             <span class="badge ${q.isPYQ ? 'badge-service' : 'badge-product'}">${q.pyqLabel || 'Standard Pattern'}</span>
                             ${q.companyName ? `<span class="badge badge-product">${q.companyName} Pattern</span>` : ''}
                         </div>
-                        <span class="badge badge-difficulty-${q.difficulty.toLowerCase()}">${q.difficulty}</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="badge badge-difficulty-${q.difficulty.toLowerCase()}">${q.difficulty}</span>
+                            ${isCodingDomain ? `
+                                <button class="btn btn-primary" style="padding: 3px 10px; font-size: 0.72rem; background: #0F172A; border-color: #334155; color: #38BDF8;" onclick="window.location.href='coding.html'" title="Open LeetCode Code Arena">
+                                    💻 Code in Arena
+                                </button>
+                            ` : ''}
+                            <button class="btn btn-secondary" style="padding: 3px 8px; font-size: 0.72rem;" onclick="window.location.href='training.html'" title="Review topic theory in Training">
+                                📖 Learn Topic
+                            </button>
+                        </div>
                     </div>
 
                     <div style="font-size: 1.02rem; font-weight: 600; color: var(--text-primary); margin-bottom: 18px; line-height: 1.5; white-space: pre-line;">
@@ -739,24 +946,57 @@ function initPracticePage() {
                     </div>
 
                     <div class="exam-options-container" id="options-${q.id}">
-                        ${q.options.map((opt, optIdx) => `
-                            <div class="exam-option-item ${completedRecord && completedRecord.selectedOption === optIdx ? (optIdx === q.correctOption ? 'correct' : 'incorrect') : ''}" 
-                                 onclick="handlePracticeOptionClick('${q.id}', ${optIdx}, ${q.correctOption})">
-                                <div class="option-radio-circle"></div>
-                                <span class="option-text">${opt}</span>
-                            </div>
-                        `).join("")}
+                        ${q.options.map((opt, optIdx) => {
+                            let itemClass = "";
+                            let itemStyle = "";
+                            if (isCompleted) {
+                                if (optIdx === q.correctOption) {
+                                    itemClass = "correct";
+                                    itemStyle = "border-color: #10B981; background-color: #ECFDF5;";
+                                } else if (optIdx === chosenOption && !isCorrect) {
+                                    itemClass = "incorrect";
+                                    itemStyle = "border-color: #EF4444; background-color: #FEF2F2;";
+                                }
+                            }
+                            return `
+                                <div class="exam-option-item ${itemClass}" 
+                                     style="${itemStyle}"
+                                     onclick="handlePracticeOptionClick('${q.id}', ${optIdx}, ${q.correctOption})">
+                                    <div class="option-radio-circle" style="font-size: 0.74rem; font-weight: 700; display: flex; align-items: center; justify-content: center;">
+                                        ${String.fromCharCode(65 + optIdx)}
+                                    </div>
+                                    <span class="option-text">${opt}</span>
+                                </div>
+                            `;
+                        }).join("")}
                     </div>
 
-                    <div id="explanation-${q.id}" class="solution-explanation" style="display: ${completedRecord ? 'block' : 'none'};">
-                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Step-by-Step Explanation:</strong>
+                    <!-- Instant Verification Feedback -->
+                    <div id="feedback-${q.id}" style="margin-top: 14px; display: ${isCompleted ? 'block' : 'none'};">
+                        ${isCompleted ? (
+                            isCorrect 
+                            ? `<div style="display: flex; align-items: center; gap: 8px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: var(--radius-sm); padding: 10px 14px; color: #065F46; font-size: 0.88rem; font-weight: 600;">
+                                  <span>✅ Correct!</span> <span>Option ${String.fromCharCode(65 + chosenOption)} is the right answer. Great work!</span>
+                               </div>`
+                            : `<div style="display: flex; align-items: center; gap: 8px; background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius-sm); padding: 10px 14px; color: #991B1B; font-size: 0.88rem; font-weight: 600;">
+                                  <span>❌ Incorrect.</span> <span>You selected Option ${String.fromCharCode(65 + chosenOption)}. The correct answer is <strong>Option ${String.fromCharCode(65 + q.correctOption)}</strong>.</span>
+                               </div>`
+                        ) : ''}
+                    </div>
+
+                    <!-- Step-by-Step Explanation -->
+                    <div id="explanation-${q.id}" class="solution-explanation" style="display: ${isCompleted ? 'block' : 'none'};">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 6px; font-size: 0.9rem;">Step-by-Step Placement Solution:</strong>
                         ${q.explanation}
                     </div>
                 </div>
             `;
         }).join("");
+
+        questionsContainer.innerHTML = statsBarHtml + leetCodeBannerHtml + questionsListHtml;
     }
 
+    window.refreshPracticeView = renderPracticeQuestions;
     renderPracticeQuestions();
 }
 
@@ -766,6 +1006,7 @@ function handlePracticeOptionClick(questionId, selectedOptIdx, correctOptIdx) {
 
     const optionsContainer = document.getElementById(`options-${questionId}`);
     const explanationBox = document.getElementById(`explanation-${questionId}`);
+    const feedbackBox = document.getElementById(`feedback-${questionId}`);
     if (!optionsContainer) return;
 
     const optionItems = optionsContainer.querySelectorAll(".exam-option-item");
@@ -773,14 +1014,28 @@ function handlePracticeOptionClick(questionId, selectedOptIdx, correctOptIdx) {
 
     optionItems.forEach((item, idx) => {
         item.classList.remove("selected", "correct", "incorrect");
+        item.removeAttribute("style");
         if (idx === correctOptIdx) {
+            item.classList.add("correct");
             item.style.borderColor = "#10B981";
             item.style.backgroundColor = "#ECFDF5";
         } else if (idx === selectedOptIdx && !isCorrect) {
+            item.classList.add("incorrect");
             item.style.borderColor = "#EF4444";
             item.style.backgroundColor = "#FEF2F2";
         }
     });
+
+    if (feedbackBox) {
+        feedbackBox.style.display = "block";
+        feedbackBox.innerHTML = isCorrect 
+            ? `<div style="display: flex; align-items: center; gap: 8px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: var(--radius-sm); padding: 10px 14px; color: #065F46; font-size: 0.88rem; font-weight: 600;">
+                  <span>✅ Correct!</span> <span>Option ${String.fromCharCode(65 + selectedOptIdx)} is the right answer. Great work!</span>
+               </div>`
+            : `<div style="display: flex; align-items: center; gap: 8px; background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius-sm); padding: 10px 14px; color: #991B1B; font-size: 0.88rem; font-weight: 600;">
+                  <span>❌ Incorrect.</span> <span>You selected Option ${String.fromCharCode(65 + selectedOptIdx)}. The correct answer is <strong>Option ${String.fromCharCode(65 + correctOptIdx)}</strong>.</span>
+               </div>`;
+    }
 
     if (explanationBox) {
         explanationBox.style.display = "block";
@@ -788,9 +1043,32 @@ function handlePracticeOptionClick(questionId, selectedOptIdx, correctOptIdx) {
 
     // Save progress to state
     window.PrepForgeState?.recordPracticeAnswer(questionId, selectedOptIdx, isCorrect);
+
+    // Update live top summary counters if present
+    const allQuestions = window.PREPFORGE_DATA?.practiceQuestions || [];
+    const solvedCount = allQuestions.filter(q => window.PrepForgeState?.isQuestionCompleted(q.id)).length;
+    const correctCount = allQuestions.filter(q => window.PrepForgeState?.getQuestionRecord(q.id)?.isCorrect).length;
+    const solvedEl = document.getElementById("practiceStatsSolved");
+    const accEl = document.getElementById("practiceStatsAccuracy");
+    if (solvedEl) solvedEl.textContent = `${solvedCount} / ${allQuestions.length}`;
+    if (accEl && solvedCount > 0) accEl.textContent = `${Math.round((correctCount / solvedCount) * 100)}%`;
+}
+
+function resetPracticeProgress() {
+    if (confirm("Reset all solved practice answers? This will let you practice all questions again from scratch.")) {
+        const state = window.PrepForgeState?.getState();
+        if (state) {
+            state.completedQuestions = {};
+            window.PrepForgeState?.save(state);
+        }
+        if (window.refreshPracticeView) {
+            window.refreshPracticeView();
+        }
+    }
 }
 
 window.handlePracticeOptionClick = handlePracticeOptionClick;
+window.resetPracticeProgress = resetPracticeProgress;
 
 /* ==========================================================================
    Performance Page Analytics

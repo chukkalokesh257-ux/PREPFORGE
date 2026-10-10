@@ -150,6 +150,50 @@ class PrepForgeStateManager {
     isCompanyBookmarked(companyId) {
         return this.state.bookmarkedCompanies.includes(companyId);
     }
+
+    recordCodingProblemSolved(problemId, details = {}) {
+        if (!this.state.solvedCodingProblems) {
+            this.state.solvedCodingProblems = {};
+        }
+        if (!this.state.codingSubmissions) {
+            this.state.codingSubmissions = [];
+        }
+
+        this.state.solvedCodingProblems[problemId] = {
+            solvedAt: new Date().toISOString(),
+            language: details.language || 'javascript',
+            runtimeMs: details.runtimeMs || 0
+        };
+
+        this.state.codingSubmissions.unshift({
+            id: "sub-" + Date.now(),
+            problemId: problemId,
+            status: "Accepted",
+            language: details.language || 'javascript',
+            runtimeMs: details.runtimeMs || 0,
+            passedCount: details.passedCount,
+            totalCount: details.totalCount,
+            timestamp: new Date().toISOString()
+        });
+
+        // Boost student readiness for solved coding problems
+        if (this.state.student.placementReadiness < 99) {
+            this.state.student.placementReadiness = Math.min(99, this.state.student.placementReadiness + 1);
+        }
+
+        this.save();
+        return this.state.solvedCodingProblems[problemId];
+    }
+
+    isCodingProblemSolved(problemId) {
+        return !!(this.state.solvedCodingProblems && this.state.solvedCodingProblems[problemId]);
+    }
+
+    getCodingSubmissions(problemId = null) {
+        const subs = this.state.codingSubmissions || [];
+        if (!problemId) return subs;
+        return subs.filter(s => s.problemId === problemId);
+    }
 }
 
 // Global state instance

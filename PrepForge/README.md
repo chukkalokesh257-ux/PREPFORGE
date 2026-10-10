@@ -28,20 +28,26 @@ A realistic, professional, commercial-grade web dashboard UI designed for colleg
      - **Study Hours**: 28 hours dedicated (`↑ 6h this week`).
      - **Streak**: 7 days (`Keep going! 🔥`).
 
-4. **Explore 17 Recruiting Companies**:
+4. **Explore 17 Recruiting Companies (Dedicated Standalone Pages & Authentic Logos)**:
    - Comprehensive database covering: **TCS, Infosys, Accenture, Wipro, Cognizant, Capgemini, Tech Mahindra, HCL Technologies, IBM, Deloitte, Amazon, Microsoft, Google, Flipkart, Walmart, Meesho, Zoho**.
-   - Each card displays: Company Type (`Product Based` / `Service Based`), Eligibility criteria (CGPA, Branch, Backlog criteria), Roles offered, Package/CTC, Selection process, and Test pattern tags.
-   - **Interactive Company Details Profile**: Clicking `"View Details →"` opens an in-depth modal displaying the selection timeline (Rounds 1–5), syllabus focus, and a direct `"Start Company Preparation →"` CTA.
+   - **Authentic Company Vector Logos**: Clean, high-fidelity SVGs embedded directly into the platform matching the authentic branding for each company.
+   - **17 Separate Standalone HTML Files**: Each company has its own complete, dedicated profile page under `Frontend/html/companies/` (e.g. `tcs.html`, `infosys.html`, `accenture.html`, `amazon.html`, `microsoft.html`, `google.html`, etc.).
+   - Each page features an interactive selection process timeline, test pattern breakdown, eligibility criteria, CTC ranges, and direct preparation CTAs.
 
-5. **Dual-Mode Training Module**:
-   - **General Placement Training**: Foundational curriculum across all 6 core domains.
-   - **Company-Specific Training**: Tailored topics targeting specific recruiters (e.g., TCS NQT patterns, Infosys cryptarithmetic, Amazon trees/DP).
-   - Core 6 Domains: **Aptitude, Reasoning, Verbal, Coding / DSA, SQL, DBMS**.
+5. **Training Module with Concepts, Formulas & Small Worked Examples**:
+   - In **Training**, students are taught concepts before solving problems.
+   - Clicking `"Learn & Examples 📖"` on any topic opens the comprehensive **Topic Lesson Modal**:
+     - **1. Conceptual Foundations & Rules**: Core definitions, properties, and shortcut elimination principles.
+     - **2. Key Formulas & Standard Techniques**: Highlighted mathematical and computational formulas.
+     - **3. Worked Example 1 (Foundation Example)**: Step-by-step problem with complete working.
+     - **4. Worked Example 2 (Placement Interview / PYQ Level)**: Realistic campus drive problem with full solution.
+     - Direct CTA: `"Solve Practice Problems on this Topic →"`.
 
-6. **Interactive Practice Question Engine**:
-   - Practice questions tagged by domain, difficulty, and company PYQ status (e.g., *TCS NQT 2024*, *Infosys Pattern*, *Amazon SDE OA*).
-   - Instant answer validation upon selection with detailed step-by-step mathematical and algorithmic explanations.
-   - LocalStorage tracking for accuracy and completed question history.
+6. **Active Practice Question Engine (56+ Problems To Do)**:
+   - In **Practice**, students get real problems to actively solve.
+   - Live session stats bar (Available problems, Solved count, Live accuracy %).
+   - Instant validation: Selecting an option immediately shows whether it is correct (🟢) or incorrect (🔴), displaying the correct option and full step-by-step placement derivation.
+   - Direct button to review the theory back in Training if needed.
 
 7. **Full Exam Simulation Engine**:
    - **No exam instructions on the dashboard**: Instructions appear strictly in a dedicated pre-exam modal after the student clicks `"Start Test"`.
@@ -74,12 +80,12 @@ A realistic, professional, commercial-grade web dashboard UI designed for colleg
 ## 🛠️ Technology Stack (Strictly Frontend Only)
 
 This project has been built strictly adhering to the technical constraints:
-- **HTML5**: Semantic document structure across 7 dedicated page templates.
+- **HTML5**: Semantic document structure across 24 dedicated page templates (7 core modules + 17 dedicated company pages).
 - **CSS3**: Custom properties (CSS variables), Flexbox, CSS Grid, SVG progress circles, modal animations, and responsive breakpoints.
 - **Vanilla JavaScript (ES6+)**:
-  - `data.js`: Complete local database of 17 companies, 6 syllabus tracks, 40+ practice questions, mock tests, and resources.
+  - `data.js`: Complete local database of 17 companies, authentic vector logos, 6 syllabus tracks, 56+ practice questions, mock tests, and resources.
   - `state.js`: LocalStorage state management engine for persistent readiness scoring, question tracking, and test results.
-  - `app.js`: Global header search filtering, notification toggles, company modal controller, and module routing.
+  - `app.js`: Global header search filtering, notification toggles, company modal controller, topic lesson viewer, practice engine, and module routing.
   - `exam.js`: Timed exam simulation engine, question palette tracking, and results calculation.
 - **Zero Frameworks**: No React, Angular, Vue, Bootstrap, or Tailwind.
 - **Zero Backend / Zero APIs**: 100% offline-ready, requiring no database or network calls.
@@ -97,12 +103,31 @@ PrepForge/
 └── Frontend/
     ├── html/
     │   ├── dashboard.html        (Main placement dashboard with full-width layout)
-    │   ├── companies.html        (Explore 17+ recruiting companies & profiles)
-    │   ├── training.html         (Company-specific & General training tracks)
-    │   ├── practice.html         (Interactive practice question engine with explanations)
+    │   ├── companies.html        (Catalog of 17+ recruiting companies)
+    │   ├── training.html         (Theory, key formulas & worked examples for all topics)
+    │   ├── practice.html         (56+ interactive problems to solve with live verification)
     │   ├── mock-tests.html       (Mock tests series, pre-exam modal & full exam simulation)
     │   ├── performance.html      (Detailed performance analytics & diagnostics)
-    │   └── resources.html        (Placement guides, formula cheat sheets, interview prep)
+    │   ├── resources.html        (Placement guides, formula cheat sheets, interview prep)
+    │   │
+    │   └── companies/            (Dedicated Standalone Pages for ALL 17 Companies)
+    │       ├── tcs.html          (TCS dedicated profile, NQT test pattern & rounds)
+    │       ├── infosys.html      (Infosys dedicated profile, test pattern & rounds)
+    │       ├── accenture.html    (Accenture dedicated profile, test pattern & rounds)
+    │       ├── amazon.html       (Amazon dedicated profile, SDE test pattern & rounds)
+    │       ├── microsoft.html    (Microsoft dedicated profile, test pattern & rounds)
+    │       ├── google.html       (Google dedicated profile, test pattern & rounds)
+    │       ├── wipro.html        (Wipro dedicated profile, test pattern & rounds)
+    │       ├── cognizant.html    (Cognizant dedicated profile, test pattern & rounds)
+    │       ├── capgemini.html    (Capgemini dedicated profile, test pattern & rounds)
+    │       ├── tech-mahindra.html(Tech Mahindra dedicated profile & test pattern)
+    │       ├── hcl.html          (HCL Technologies dedicated profile & test pattern)
+    │       ├── ibm.html          (IBM dedicated profile, test pattern & rounds)
+    │       ├── deloitte.html     (Deloitte dedicated profile, test pattern & rounds)
+    │       ├── flipkart.html     (Flipkart dedicated profile, test pattern & rounds)
+    │       ├── walmart.html      (Walmart Global Tech profile, test pattern & rounds)
+    │       ├── meesho.html       (Meesho dedicated profile, test pattern & rounds)
+    │       └── zoho.html         (Zoho dedicated profile, test pattern & rounds)
     │
     ├── css/
     │   ├── styles.css            (Design tokens, dark navy sidebar, header & base styles)
@@ -110,9 +135,9 @@ PrepForge/
     │   └── exam.css              (Exam simulator, question palette, timer, scorecard)
     │
     ├── javascript/
-    │   ├── data.js               (Rich local dataset: companies, syllabus, questions, tests)
+    │   ├── data.js               (Rich local dataset: 17 authentic SVGs, 56+ Qs, lessons)
     │   ├── state.js              (LocalStorage management for user progress & scores)
-    │   ├── app.js                (Navigation, live search, company modal & page logic)
+    │   ├── app.js                (Navigation, live search, company modal & lesson logic)
     │   └── exam.js               (Exam engine, live timer, palette & results renderer)
     │
     └── assets/                   (High-fidelity vector icons & styling assets)

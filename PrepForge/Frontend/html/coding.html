@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrepForge - LeetCode-Style Interactive Coding Arena</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/coding.css">
+</head>
+<body class="coding-page">
+
+    <!-- Top Navigation Bar -->
+    <header class="coding-navbar">
+        <div class="coding-nav-left">
+            <a href="dashboard.html" class="coding-logo" title="Back to PrepForge Dashboard">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+                <span>PrepForge <span style="font-size: 0.72rem; color: #38BDF8; font-weight: 700; background: rgba(56, 189, 248, 0.15); padding: 2px 6px; border-radius: 4px; margin-left: 4px;">CODE ARENA</span></span>
+            </a>
+
+            <!-- Problem Selector & Nav -->
+            <div class="coding-problem-nav">
+                <button class="coding-nav-btn" id="btnPrevProblem" title="Previous Problem">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <select id="codingProblemSelect" class="coding-problem-select" title="Jump to Problem"></select>
+                <button class="coding-nav-btn" id="btnNextProblem" title="Next Problem">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="coding-nav-center">
+            <button class="coding-run-btn" id="btnRunCode" title="Run code on visible sample test cases">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Run Code</span>
+            </button>
+            <button class="coding-submit-btn" id="btnSubmitCode" title="Submit code to run all test cases (including hidden edge cases)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Submit</span>
+            </button>
+        </div>
+
+        <div class="coding-nav-right">
+            <a href="practice.html" class="coding-exit-btn" title="Back to Practice Questions">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span>Practice MCQs</span>
+            </a>
+            <a href="dashboard.html" class="coding-exit-btn" title="Return to Dashboard">
+                <span>Dashboard</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace (Dual Split-Pane) -->
+    <div class="coding-workspace">
+        
+        <!-- Left Pane: Problem Description -->
+        <section class="problem-pane">
+            <div class="problem-pane-header">
+                <button class="problem-tab-btn active" id="tabDescription">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                    <span>Description</span>
+                </button>
+                <button class="problem-tab-btn" id="tabSubmissions">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>Submissions</span>
+                </button>
+            </div>
+
+            <div class="problem-pane-body">
+                <!-- Description Tab Content -->
+                <div id="problemDescContent">
+                    <div class="problem-header-wrap">
+                        <h1 class="problem-title-h1" id="probTitle">1. Two Sum</h1>
+                        <div class="problem-meta-badges">
+                            <span class="badge" id="probDifficulty">Easy</span>
+                            <span style="font-size: 0.8rem; color: #94A3B8;" id="probAcceptance">Acceptance: 49.8%</span>
+                        </div>
+                        <div style="font-size: 0.78rem; font-weight: 600; color: #64748B; margin-bottom: 4px;">Top Recruiter Drives:</div>
+                        <div class="problem-company-tags" id="probCompanyTags"></div>
+                    </div>
+
+                    <div class="problem-description-content" id="probDescription"></div>
+                    <div id="probExamples"></div>
+
+                    <div class="constraints-box">
+                        <div class="constraints-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            <span>Constraints:</span>
+                        </div>
+                        <ul class="constraints-list" id="probConstraints"></ul>
+                    </div>
+                </div>
+
+                <!-- Submissions Tab Content -->
+                <div id="problemSubmissionsContent" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Right Pane: IDE Editor & Console -->
+        <section class="ide-pane">
+            
+            <!-- Editor Toolbar -->
+            <div class="editor-toolbar">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <select id="editorLangSelect" class="editor-lang-select" title="Select Programming Language">
+                        <option value="javascript" selected>JavaScript (ES6 / Node)</option>
+                        <option value="python">Python 3</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++ (GCC)</option>
+                    </select>
+                    <span style="font-size: 0.75rem; color: #10B981; font-weight: 600;">● In-Browser Sandbox Ready</span>
+                </div>
+
+                <div class="editor-tools-right">
+                    <button class="editor-tool-btn" id="btnResetCode" title="Reset code to original starter template">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                            <path d="M21 3v5h-5"></path>
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                            <path d="M3 21v-5h5"></path>
+                        </svg>
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Editor Area -->
+            <div class="editor-main-wrap">
+                <div class="editor-gutter" id="editorGutter"></div>
+                <textarea class="editor-textarea" id="editorTextarea" spellcheck="false" placeholder="// Write your solution here..."></textarea>
+            </div>
+
+            <!-- Bottom Console Drawer -->
+            <div class="console-drawer" id="consoleDrawer">
+                <div class="console-header">
+                    <div class="console-tabs">
+                        <button class="console-tab-btn active" id="tabTestcase">Testcase</button>
+                        <button class="console-tab-btn" id="tabResult">Test Result</button>
+                    </div>
+                    <button class="editor-tool-btn" id="btnToggleConsole" style="font-size: 0.75rem;">
+                        ▼ Collapse
+                    </button>
+                </div>
+                <div class="console-body" id="consoleBody"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../javascript/data.js"></script>
+    <script src="../javascript/state.js"></script>
+    <script src="../javascript/coding-data.js"></script>
+    <script src="../javascript/code-runner.js"></script>
+    <script src="../javascript/coding-app.js"></script>
+</body>
+</html>
