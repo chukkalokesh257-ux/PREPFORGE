@@ -225,9 +225,9 @@
             if (rep.status === "Wrong Answer") {
                 bannerClass = "status-wrong-banner";
                 statusIcon = "✗";
-            } else if (rep.status === "Runtime Error" || rep.status === "Time Limit Exceeded") {
+            } else if (rep.status === "Runtime Error" || rep.status === "Time Limit Exceeded" || rep.status === "Execution Not Available") {
                 bannerClass = "status-error-banner";
-                statusIcon = "⚠";
+                statusIcon = rep.status === "Execution Not Available" ? "ⓘ" : "⚠";
             }
 
             consoleBody.innerHTML = `
@@ -237,9 +237,10 @@
                         <span>${rep.status}</span>
                     </div>
                     <div class="result-runtime-meta">
-                        Passed: ${rep.passedCount} / ${rep.totalCount} Test Cases
+                        ${rep.status === "Execution Not Available" ? "No test cases evaluated" : `Passed: ${rep.passedCount} / ${rep.totalCount} Test Cases`}
                         ${rep.runtimeMs ? `• Runtime: ${rep.runtimeMs} ms` : ""}
                     </div>
+                    ${rep.message ? `<div style="font-size:0.82rem;margin-top:8px;">${rep.message}</div>` : ""}
                 </div>
 
                 ${rep.percentileBeats ? `
@@ -251,8 +252,8 @@
 
                 <div class="testcase-pills">
                     ${rep.results.map((r, i) => `
-                        <button class="case-pill ${i === activeCaseIndex ? 'active' : ''}" onclick="window.switchTestCase(${i})" style="color: ${r.passed ? '#34D399' : '#F87171'}; border-color: ${r.passed ? 'rgba(16, 185, 129, 0.4)' : 'rgba(239, 68, 68, 0.4)'};">
-                            ${r.passed ? '✓' : '✗'} Case ${i + 1}
+                        <button class="case-pill ${i === activeCaseIndex ? 'active' : ''}" onclick="window.switchTestCase(${i})" style="color: ${r.passed === null ? '#94A3B8' : (r.passed ? '#34D399' : '#F87171')}; border-color: ${r.passed === null ? 'rgba(148, 163, 184, 0.4)' : (r.passed ? 'rgba(16, 185, 129, 0.4)' : 'rgba(239, 68, 68, 0.4)')};">
+                            ${r.passed === null ? '—' : (r.passed ? '✓' : '✗')} Case ${i + 1}
                         </button>
                     `).join("")}
                 </div>

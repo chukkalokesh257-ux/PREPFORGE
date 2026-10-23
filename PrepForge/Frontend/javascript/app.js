@@ -15,7 +15,9 @@ function initApp() {
     // Determine current page and initialize specific modules
     const path = window.location.pathname.toLowerCase();
     
-    if (path.includes("dashboard") || path.endsWith("/html/") || path.endsWith("index.html") || path === "/" || (!path.includes("companies") && !path.includes("training") && !path.includes("practice") && !path.includes("mock-tests") && !path.includes("performance") && !path.includes("resources"))) {
+    if (path.includes("syllabus")) {
+        initCompanySyllabusPage();
+    } else if (path.includes("dashboard") || path.endsWith("/html/") || path.endsWith("index.html") || path === "/" || (!path.includes("companies") && !path.includes("training") && !path.includes("practice") && !path.includes("mock-tests") && !path.includes("performance") && !path.includes("resources"))) {
         initDashboardPage();
     } else if (path.includes("companies")) {
         initCompaniesPage();
@@ -41,6 +43,12 @@ function setupSidebarNavigation() {
     const sidebarToggle = document.querySelector(".sidebar-toggle");
     const sidebarBackdrop = document.querySelector(".sidebar-backdrop");
     if (appContainer && sidebarToggle) {
+        // Always begin with navigation closed, including company-detail pages.
+        // On mobile the collapsed sidebar can still be opened by the hamburger
+        // because the CSS supports .sidebar-collapsed.sidebar-open.
+        appContainer.classList.add("sidebar-collapsed");
+        appContainer.classList.remove("sidebar-open");
+        sidebarToggle.setAttribute("aria-expanded", "false");
         sidebarToggle.addEventListener("click", () => {
             const isMobile = window.matchMedia("(max-width: 900px)").matches;
             if (isMobile) {
@@ -62,6 +70,16 @@ function setupSidebarNavigation() {
             }
         });
     }
+    // Company Details is navigation, not a sidebar control. Stop any delegated
+    // card click handlers from treating it as a sidebar interaction.
+    document.addEventListener("click", event => {
+        const detailsLink = event.target.closest?.(".btn-view-details");
+        if (!detailsLink) return;
+        // Capture-phase handling also covers company cards rendered after setup.
+        appContainer?.classList.remove("sidebar-open");
+        sidebarToggle?.setAttribute("aria-expanded", "false");
+    }, true);
+
     // Highlight current page in sidebar
     const currentPath = window.location.pathname.toLowerCase();
     const navItems = document.querySelectorAll(".sidebar-nav .nav-item");
@@ -71,6 +89,15 @@ function setupSidebarNavigation() {
         if (href && currentPath.includes(href.toLowerCase().replace("./", ""))) {
             item.classList.add("active");
         }
+        // Selecting any module closes the sidebar; on the next page load it remains closed.
+        item.addEventListener("click", () => {
+            if (window.matchMedia("(max-width: 900px)").matches) {
+                appContainer?.classList.remove("sidebar-open");
+            } else {
+                appContainer?.classList.add("sidebar-collapsed");
+            }
+            sidebarToggle?.setAttribute("aria-expanded", "false");
+        });
     });
 
     // Logout confirmation
@@ -534,10 +561,11 @@ function initCompaniesPage() {
                         <span class="difficulty-dot ${c.difficulty.toLowerCase()}"></span>
                         <span>${c.difficulty} Difficulty</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                         <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 0.78rem;" onclick="openCompanyModal('${c.id}')" title="Quick Overview">
                             Preview
                         </button>
+                        <a href="syllabus.html?company=${c.id}" class="btn btn-outline" style="padding: 6px 10px; font-size: 0.78rem; text-decoration: none;">Syllabus</a>
                         <a href="companies/${c.id}.html" class="btn-view-details" style="text-decoration: none; display: inline-flex; align-items: center;">
                             Details →
                         </a>
@@ -864,7 +892,7 @@ function initPracticePage() {
         const selectedCompany = companySelect ? companySelect.value : "";
 
         const filtered = allQuestions.filter(q => {
-            const matchesMode = currentMode === "general" ? true : (selectedCompany ? q.company === selectedCompany : true);
+            const matchesMode = currentMode === "general" ? !q.company : (selectedCompany ? q.company === selectedCompany : false);
             const matchesDomain = selectedDomain === "all" ? true : q.domain.toLowerCase().includes(selectedDomain.toLowerCase());
             return matchesMode && matchesDomain;
         });
@@ -872,8 +900,8 @@ function initPracticePage() {
         if (filtered.length === 0) {
             questionsContainer.innerHTML = `
                 <div style="background: #FFFFFF; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 48px; text-align: center; color: var(--text-muted);">
-                    <h3>No practice questions found for this filter</h3>
-                    <p style="margin-top: 8px;">Try switching domains or choosing another company.</p>
+                    <h3>${currentMode === "company" && !selectedCompany ? "Choose a company to view its question bank" : "No practice questions found for this filter"}</h3>
+                    <p style="margin-top: 8px;">${currentMode === "company" && !selectedCompany ? "Select a recruiting company above. Each company uses its own questions and difficulty levels." : "Try switching domains or choosing another company."}</p>
                 </div>
             `;
             return;
@@ -885,6 +913,15 @@ function initPracticePage() {
         const solvedCount = solvedQuestions.length;
         const correctCount = filtered.filter(q => window.PrepForgeState?.getQuestionRecord(q.id)?.isCorrect).length;
         const accuracyRate = solvedCount > 0 ? Math.round((correctCount / solvedCount) * 100) : 0;
+
+        const selectedCompanyData = selectedCompany ? (window.PREPFORGE_DATA?.companies || []).find(c => c.id === selectedCompany) : null;
+        const companyProfileHtml = currentMode === "company" && selectedCompanyData ? `
+            <div class="card" style="padding: 16px 20px; margin-bottom: 18px; border-left: 4px solid #6366F1;">
+                <strong>${selectedCompanyData.name} preparation bank</strong>
+                <span class="badge badge-difficulty-${String(selectedCompanyData.difficulty || 'Medium').toLowerCase()}" style="margin-left: 8px;">${selectedCompanyData.difficulty || 'Medium'} overall level</span>
+                <p style="margin-top: 6px; color: var(--text-secondary); font-size: 0.86rem;">Focus: ${selectedCompanyData.syllabusFocus}. Questions below are tagged for this company; individual questions may have Easy, Medium, or Hard difficulty.</p>
+                <a href="syllabus.html?company=${selectedCompanyData.id}" style="display: inline-block; margin-top: 8px; font-weight: 700; color: var(--primary);">View syllabus only →</a>
+            </div>` : '';
 
         const statsBarHtml = `
             <div class="card" style="padding: 18px 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);">
@@ -913,42 +950,13 @@ function initPracticePage() {
             </div>
         `;
 
-        const showLeetCodeBanner = selectedDomain === "all" || selectedDomain.toLowerCase().includes("coding");
-        const leetCodeBannerHtml = showLeetCodeBanner ? `
-            <div class="card" style="padding: 20px 24px; margin-bottom: 24px; background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border: 1px solid #334155; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; color: #FFFFFF;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #38BDF8; flex-shrink: 0;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
-                    </div>
-                    <div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 1.05rem; font-weight: 800; color: #F8FAFC;">PrepForge LeetCode Code Arena</span>
-                            <span class="badge" style="background: #10B981; color: #FFFFFF; font-weight: 700; font-size: 0.72rem;">LIVE COMPILER</span>
-                        </div>
-                        <div style="font-size: 0.84rem; color: #94A3B8; margin-top: 4px;">
-                            Write, run, and submit actual code with custom test cases, live execution feedback, and automated edge-case grading.
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <a href="coding.html" class="btn" style="background: #059669; color: #FFFFFF; border: 1px solid #10B981; font-weight: 700; padding: 8px 18px; font-size: 0.86rem; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);">
-                        <span>Launch Code Arena →</span>
-                    </a>
-                </div>
-            </div>
-        ` : '';
 
         const questionsListHtml = filtered.map((q, idx) => {
             const completedRecord = window.PrepForgeState?.getQuestionRecord(q.id);
             const isCompleted = !!completedRecord;
             const isCorrect = completedRecord ? completedRecord.isCorrect : false;
             const chosenOption = completedRecord ? completedRecord.selectedOption : null;
-            const isCodingDomain = q.domain.toLowerCase().includes("coding");
-
-            return `
+return `
                 <div class="card" style="margin-bottom: 24px; padding: 26px;" id="question-card-${q.id}">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
                         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -958,11 +966,6 @@ function initPracticePage() {
                         </div>
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span class="badge badge-difficulty-${q.difficulty.toLowerCase()}">${q.difficulty}</span>
-                            ${isCodingDomain ? `
-                                <button class="btn btn-primary" style="padding: 3px 10px; font-size: 0.72rem; background: #0F172A; border-color: #334155; color: #38BDF8;" onclick="window.location.href='coding.html'" title="Open LeetCode Code Arena">
-                                    💻 Code in Arena
-                                </button>
-                            ` : ''}
                             <button class="btn btn-secondary" style="padding: 3px 8px; font-size: 0.72rem;" onclick="window.location.href='training.html'" title="Review topic theory in Training">
                                 📖 Learn Topic
                             </button>
@@ -1021,7 +1024,7 @@ function initPracticePage() {
             `;
         }).join("");
 
-        questionsContainer.innerHTML = statsBarHtml + leetCodeBannerHtml + questionsListHtml;
+        questionsContainer.innerHTML = companyProfileHtml + statsBarHtml + questionsListHtml;
     }
 
     window.refreshPracticeView = renderPracticeQuestions;
@@ -1163,9 +1166,9 @@ function initResourcesPage() {
 
                 <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 14px;">
                     <span style="font-size: 0.76rem; color: var(--text-muted);">${r.pages} • By ${r.author}</span>
-                    <button class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;" onclick="alert('Viewing study material: ${r.title}')">
-                        Open Guide →
-                    </button>
+                    <a class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem; text-decoration: none;" href="${r.url || '#'}" target="_blank" rel="noopener noreferrer">
+                        Open Guide ↗
+                    </a>
                 </div>
             </div>
         `).join("");

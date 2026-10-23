@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/exam.css">
+    <link rel="stylesheet" href="../css/topic-session.css">
 </head>
 <body>
     <div class="app-container">
@@ -174,23 +175,7 @@
                     </div>
                 </div>
 
-                <!-- Practice Type Switcher: MCQ vs LeetCode Code Arena -->
-                <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-                    <a href="practice.html" class="btn btn-primary" style="padding: 10px 18px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 11 12 14 22 4"></polyline>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                        </svg>
-                        <span>Placement MCQs</span>
-                    </a>
-                    <a href="coding.html" class="btn" style="padding: 10px 20px; font-weight: 700; background: #0F172A; color: #38BDF8; border: 1px solid #334155; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
-                        <span>💻 LeetCode Code Arena (Type, Run & Submit Real Code)</span>
-                    </a>
-                </div>
+                
 
                 <!-- Mode & Filter Bar -->
                 <div class="filter-bar">
@@ -210,13 +195,25 @@
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Domain:</span>
                             <select id="practiceDomainSelect" style="padding: 6px 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: #FFFFFF; font-size: 0.84rem; font-weight: 600; outline: none;">
-                                <option value="all">All Domains (6 Core)</option>
+                                <option value="all">All Domains (7 Core)</option>
                                 <option value="Aptitude">Aptitude</option>
                                 <option value="Reasoning">Reasoning</option>
-                                <option value="Verbal">Verbal</option>
+                                <option value="Verbal">Verbal English</option>
                                 <option value="Coding">Coding / DSA</option>
                                 <option value="SQL">SQL</option>
                                 <option value="DBMS">DBMS</option>
+                                <option value="C">C Programming</option>
+                                <option value="Java">Java Programming</option>
+                                <option value="Python">Python Programming</option>
+                                <option value="JavaScript">JavaScript Programming</option>
+                                <option value="Arrays">DSA - Arrays</option>
+                                <option value="Strings">DSA - Strings</option>
+                                <option value="Searching">DSA - Searching</option>
+                                <option value="Sorting">DSA - Sorting</option>
+                                <option value="Linked Lists">DSA - Linked Lists</option>
+                                <option value="Stacks & Queues">DSA - Stacks & Queues</option>
+                                <option value="Trees">DSA - Trees</option>
+                                <option value="Graphs">DSA - Graphs</option>
                             </select>
                         </div>
                     </div>
@@ -238,5 +235,7 @@
     <script src="../javascript/code-runner.js"></script>
     <script src="../javascript/auth.js"></script>
     <script src="../javascript/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <script src="../javascript/topic-session.js"></script>
 </body>
 </html>

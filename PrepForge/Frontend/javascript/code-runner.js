@@ -258,12 +258,12 @@
         let failReason = null;
 
         if (language !== 'javascript') {
-            // Inform student that live in-browser execution runs JavaScript natively
-            // While Python/Java/C++ code templates can be saved, edited and simulated
+            // Never present an unevaluated submission as passing. This runner only
+            // evaluates JavaScript locally; other languages need a configured judge.
             return {
-                status: "Language Notice",
+                status: "Execution Not Available",
                 language: language,
-                message: `Code saved in ${language.toUpperCase()}. The native in-browser execution sandbox compiles and runs JavaScript in real-time. Switch language to JavaScript to test your algorithmic solution against live test cases!`,
+                message: `${language.toUpperCase()} code has not been executed. Configure a trusted code-execution service to evaluate this language. No test cases were judged.`,
                 passedCount: 0,
                 totalCount: testCasesList.length,
                 runtimeMs: 0,
@@ -271,8 +271,8 @@
                     index: idx + 1,
                     inputDisplay: tc.inputDisplay,
                     expectedDisplay: tc.expectedDisplay,
-                    actualDisplay: `[${language.toUpperCase()} Code Template Active]`,
-                    passed: true,
+                    actualDisplay: "Not evaluated — execution service is not configured",
+                    passed: null,
                     duration: 0,
                     logs: []
                 }))

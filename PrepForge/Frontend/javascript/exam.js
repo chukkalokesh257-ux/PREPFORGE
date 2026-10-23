@@ -471,34 +471,23 @@ function initMockTestsPage() {
     if (!listContainer) return;
 
     const tests = window.PREPFORGE_DATA?.mockTests || [];
-
     listContainer.innerHTML = tests.map(test => `
         <div class="card" style="padding: 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
             <div style="max-width: 70%;">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap:wrap;">
                     <span class="badge ${test.type === 'company' ? 'badge-service' : 'badge-product'}">${test.badge}</span>
                     <span class="badge badge-difficulty-${test.difficulty.toLowerCase()}">${test.difficulty}</span>
                     <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">${test.durationMins} Mins • ${test.totalQuestions || test.questionIds.length} Questions</span>
                 </div>
                 <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">${test.title}</h3>
                 <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 12px;">${test.description}</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    ${test.sections.map(s => `<span class="topic-tag">${s}</span>`).join("")}
-                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">${test.sections.map(section => `<span class="topic-tag">${section}</span>`).join("")}</div>
             </div>
-
-            <div>
-                <button class="btn btn-primary" onclick="window.PrepForgeExam.openInstructionsModal('${test.id}')">
-                    Start Test →
-                </button>
-            </div>
+            <div><button class="btn btn-primary" onclick="window.PrepForgeExam.openInstructionsModal('${test.id}')">Start Test →</button></div>
         </div>
     `).join("");
 
-    // Check if URL has test parameter to auto-open instructions
     const urlParams = new URLSearchParams(window.location.search);
     const testParam = urlParams.get("test");
-    if (testParam) {
-        window.PrepForgeExam.openInstructionsModal(testParam);
-    }
+    if (testParam) window.PrepForgeExam.openInstructionsModal(testParam);
 }

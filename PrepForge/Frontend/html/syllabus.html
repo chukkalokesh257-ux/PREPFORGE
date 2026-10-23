@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Syllabus - PrepForge</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .syllabus-wrap{max-width:1000px;margin:0 auto;padding:32px 22px 56px}
+    .syllabus-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+    .syllabus-hero{background:linear-gradient(135deg,#eef2ff,#f5f3ff);border:1px solid #c7d2fe;border-radius:20px;padding:28px;margin-bottom:24px}
+    .syllabus-hero h1{font-size:clamp(1.6rem,3vw,2.2rem);color:#1e1b4b;margin:8px 0}
+    .syllabus-hero p{color:#4338ca;line-height:1.6}
+    .syllabus-section{background:#fff;border:1px solid var(--border-color);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-card)}
+    .syllabus-section h2{font-size:1.1rem;margin-bottom:14px;color:var(--text-primary)}
+    .syllabus-chips{display:flex;flex-wrap:wrap;gap:10px}
+    .syllabus-chip{background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:8px 13px;font-size:.88rem;color:#334155}
+    .syllabus-focus-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+    .syllabus-focus-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;line-height:1.5;color:#334155}
+    .syllabus-note{font-size:.82rem;color:var(--text-muted);line-height:1.5;margin-top:14px}
+    @media(max-width:600px){.syllabus-wrap{padding:20px 14px 40px}.syllabus-section,.syllabus-hero{padding:19px}}
+  </style>
+</head>
+<body>
+  <main class="syllabus-wrap">
+    <div class="syllabus-top">
+      <a href="companies.html" class="btn btn-outline" style="text-decoration:none">← Back to Companies</a>
+      <a href="dashboard.html" class="btn btn-secondary" style="text-decoration:none">PrepForge Dashboard</a>
+    </div>
+    <div id="syllabusContent" aria-live="polite">
+      <section class="syllabus-hero"><p>COMPANY PREPARATION</p><h1>Loading syllabus…</h1></section>
+    </div>
+  </main>
+  <script src="../javascript/auth.js"></script>
+  <script src="../javascript/data.js"></script>
+  <script src="../javascript/company-syllabus.js"></script>
+</body>
+</html>

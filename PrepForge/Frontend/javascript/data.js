@@ -2886,6 +2886,900 @@ const PREPFORGE_DATA = {
         "companyName": "Google",
         "explanation": "Step 1: Dijkstra's algorithm relies on the Greedy principle: the node with the minimum tentative distance is marked as visited/settled.\nStep 2: With non-negative weights, any alternate path through other unvisited nodes can only ADD weight, meaning the settled distance cannot be improved.\nStep 3: However, if a negative edge weight exists, a detour through a negative edge could yield a total distance smaller than the already settled distance.\nStep 4: Dijkstra cannot update already finalized nodes and therefore produces incorrect shortest path distances.\nStep 5: For graphs with negative edge weights, the Bellman-Ford algorithm (O(V × E)) must be used instead."
 }
+,
+        {
+            id: "pf-gen-apt-1",
+            domain: "Aptitude",
+            topic: "Percentages",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "A shirt priced at ₹800 is sold at a 15% discount. What is the selling price?",
+            options: ["₹620", "₹660", "₹680", "₹700"],
+            correctOption: 2,
+            explanation: "15% of 800 = 120. Selling price = 800 − 120 = ₹680."
+        },
+        {
+            id: "pf-gen-apt-2",
+            domain: "Aptitude",
+            topic: "Time & Work",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "A can finish a job in 12 days and B in 18 days. How long will they take working together?",
+            options: ["6 days", "7.2 days", "8 days", "9 days"],
+            correctOption: 1,
+            explanation: "Combined daily work = 1/12 + 1/18 = 5/36. Time = 36/5 = 7.2 days."
+        },
+        {
+            id: "pf-gen-apt-3",
+            domain: "Aptitude",
+            topic: "Ratio & Proportion",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "The ratio of boys to girls in a class is 3:5. If there are 40 students, how many are girls?",
+            options: ["15", "20", "25", "30"],
+            correctOption: 2,
+            explanation: "There are 3 + 5 = 8 parts. Each part is 40/8 = 5; girls = 5 × 5 = 25."
+        },
+        {
+            id: "pf-gen-apt-4",
+            domain: "Aptitude",
+            topic: "Profit & Loss",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "An item costs ₹1,200 and is sold for ₹1,500. What is the profit percentage?",
+            options: ["20%", "25%", "30%", "35%"],
+            correctOption: 1,
+            explanation: "Profit = 1500 − 1200 = 300. Profit percentage = 300/1200 × 100 = 25%."
+        },
+        {
+            id: "pf-gen-apt-5",
+            domain: "Aptitude",
+            topic: "Probability",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "A fair six-sided die is rolled once. What is the probability of getting a prime number?",
+            options: ["1/6", "1/3", "1/2", "2/3"],
+            correctOption: 2,
+            explanation: "Prime faces are 2, 3, and 5. Probability = 3/6 = 1/2."
+        },
+        {
+            id: "pf-gen-rea-1",
+            domain: "Reasoning",
+            topic: "Number Series",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Find the next number: 3, 6, 12, 24, __.",
+            options: ["30", "36", "42", "48"],
+            correctOption: 3,
+            explanation: "Each term is multiplied by 2. The next term is 24 × 2 = 48."
+        },
+        {
+            id: "pf-gen-rea-2",
+            domain: "Reasoning",
+            topic: "Coding-Decoding",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "If CAT is coded as DBU by shifting each letter one step forward, how is DOG coded?",
+            options: ["EPH", "EOG", "DPH", "FPH"],
+            correctOption: 0,
+            explanation: "D→E, O→P, and G→H, so DOG becomes EPH."
+        },
+        {
+            id: "pf-gen-rea-3",
+            domain: "Reasoning",
+            topic: "Direction Sense",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Ravi walks 4 km north, then 3 km east. How far is he from his starting point?",
+            options: ["5 km", "6 km", "7 km", "1 km"],
+            correctOption: 0,
+            explanation: "The path forms a right triangle. Distance = √(4² + 3²) = 5 km."
+        },
+        {
+            id: "pf-gen-rea-4",
+            domain: "Reasoning",
+            topic: "Syllogisms",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Statements: All roses are flowers. Some flowers fade quickly. Which conclusion definitely follows?",
+            options: ["All roses fade quickly", "Some roses fade quickly", "All roses are flowers", "No flowers are roses"],
+            correctOption: 2,
+            explanation: "Only the statement that all roses are flowers is guaranteed by the premises."
+        },
+        {
+            id: "pf-gen-rea-5",
+            domain: "Reasoning",
+            topic: "Odd One Out",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Choose the odd one out: 9, 16, 25, 36,  forty-nine, 54.",
+            options: ["16", "25", "49", "54"],
+            correctOption: 3,
+            explanation: "9, 16, 25, 36, and 49 are perfect squares; 54 is not."
+        },
+        {
+            id: "pf-gen-ver-1",
+            domain: "Verbal",
+            topic: "Subject-Verb Agreement",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Choose the correct sentence.",
+            options: ["Each of the students have a notebook.", "Each of the students has a notebook.", "Each students has a notebook.", "Each of student have a notebook."],
+            correctOption: 1,
+            explanation: "“Each” is singular, so it takes the singular verb “has”."
+        },
+        {
+            id: "pf-gen-ver-2",
+            domain: "Verbal",
+            topic: "Vocabulary",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Choose the closest meaning of “concise”.",
+            options: ["Confusing", "Brief and clear", "Very loud", "Uncertain"],
+            correctOption: 1,
+            explanation: "Concise means expressing something clearly in few words."
+        },
+        {
+            id: "pf-gen-ver-3",
+            domain: "Verbal",
+            topic: "Prepositions",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Choose the correct phrase.",
+            options: ["She is good in mathematics.", "She is good at mathematics.", "She is good on mathematics.", "She is good with mathematics at."],
+            correctOption: 1,
+            explanation: "The standard expression is “good at” a subject or activity."
+        },
+        {
+            id: "pf-gen-ver-4",
+            domain: "Verbal",
+            topic: "Sentence Correction",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Choose the grammatically correct sentence.",
+            options: ["Neither of the answers are correct.", "Neither of the answers is correct.", "Neither answers is correct.", "Neither answer are correct."],
+            correctOption: 1,
+            explanation: "“Neither” is treated as singular in this construction and takes “is”."
+        },
+        {
+            id: "pf-gen-ver-5",
+            domain: "Verbal",
+            topic: "Reading Comprehension",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "A passage says that regular practice improves speed but feedback improves accuracy. Which statement is supported?",
+            options: ["Speed matters and accuracy does not.", "Feedback can help improve accuracy.", "Practice always guarantees a perfect score.", "Feedback reduces speed in every case."],
+            correctOption: 1,
+            explanation: "The passage explicitly states that feedback improves accuracy."
+        },
+        {
+            id: "pf-gen-sql-1",
+            domain: "SQL",
+            topic: "SELECT & WHERE",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which query returns employees with salary greater than 50000?",
+            options: ["SELECT Employees WHERE salary > 50000;", "SELECT * FROM Employees WHERE salary > 50000;", "GET * FROM Employees IF salary > 50000;", "SELECT salary > 50000 FROM Employees;"],
+            correctOption: 1,
+            explanation: "SELECT * FROM Employees WHERE salary > 50000; selects rows meeting the condition."
+        },
+        {
+            id: "pf-gen-sql-2",
+            domain: "SQL",
+            topic: "Aggregate Functions",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which SQL function counts the number of rows?",
+            options: ["SUM()", "TOTAL()", "COUNT()", "NUMBER()"],
+            correctOption: 2,
+            explanation: "COUNT(*) returns the number of rows in the result set."
+        },
+        {
+            id: "pf-gen-sql-3",
+            domain: "SQL",
+            topic: "GROUP BY",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which clause filters grouped results after GROUP BY?",
+            options: ["WHERE", "ORDER BY", "HAVING", "LIMIT"],
+            correctOption: 2,
+            explanation: "HAVING filters groups after aggregation; WHERE filters rows before grouping."
+        },
+        {
+            id: "pf-gen-sql-4",
+            domain: "SQL",
+            topic: "Joins",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which join returns only rows with matching keys in both tables?",
+            options: ["INNER JOIN", "LEFT JOIN", "CROSS JOIN", "FULL OUTER JOIN"],
+            correctOption: 0,
+            explanation: "INNER JOIN returns rows where the join condition matches in both tables."
+        },
+        {
+            id: "pf-gen-sql-5",
+            domain: "SQL",
+            topic: "Sorting",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "How do you sort employees by salary from highest to lowest?",
+            options: ["ORDER BY salary ASC", "SORT salary DESC", "ORDER BY salary DESC", "GROUP BY salary DESC"],
+            correctOption: 2,
+            explanation: "ORDER BY salary DESC sorts from the largest salary to the smallest."
+        },
+        {
+            id: "pf-gen-dbms-1",
+            domain: "DBMS",
+            topic: "SQL vs DBMS",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "If SQL is used to write database queries, why is a DBMS still needed?",
+            options: ["SQL stores and secures data by itself without software.", "A DBMS stores, organizes, secures, and manages data while SQL is a language used to query it.", "DBMS is only another name for SELECT.", "SQL can only be used without a database system."],
+            correctOption: 1,
+            explanation: "SQL is a language; a DBMS is the software system that stores and manages the database and processes SQL statements."
+        },
+        {
+            id: "pf-gen-dbms-2",
+            domain: "DBMS",
+            topic: "Normalization",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "What is a key purpose of normalization?",
+            options: ["To duplicate every row", "To reduce data redundancy and update anomalies", "To remove all primary keys", "To prevent all SQL queries"],
+            correctOption: 1,
+            explanation: "Normalization organizes related data to reduce unnecessary duplication and update anomalies."
+        },
+        {
+            id: "pf-gen-dbms-3",
+            domain: "DBMS",
+            topic: "Primary Keys",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which statement about a primary key is correct?",
+            options: ["It may contain duplicate values.", "It must uniquely identify each row and cannot be NULL.", "It can only store text.", "Every table must have exactly two primary keys."],
+            correctOption: 1,
+            explanation: "A primary key uniquely identifies each row and cannot contain NULL values."
+        },
+        {
+            id: "pf-gen-dbms-4",
+            domain: "DBMS",
+            topic: "ACID Properties",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which ACID property means a transaction happens completely or not at all?",
+            options: ["Consistency", "Isolation", "Atomicity", "Durability"],
+            correctOption: 2,
+            explanation: "Atomicity ensures a transaction is all-or-nothing."
+        },
+        {
+            id: "pf-gen-dbms-5",
+            domain: "DBMS",
+            topic: "Indexes",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "What is a common purpose of a database index?",
+            options: ["To speed up suitable data lookups", "To replace all table data", "To guarantee every query is faster", "To prevent transactions"],
+            correctOption: 0,
+            explanation: "Indexes can improve lookup and sorting performance, though they add storage and write overhead."
+        },
+        {
+            id: "pf-gen-code-1",
+            domain: "Coding / DSA",
+            topic: "Arrays",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "What is the time complexity of accessing an array element by index in a typical array?",
+            options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+            correctOption: 0,
+            explanation: "Direct indexed access is constant time, O(1)."
+        },
+        {
+            id: "pf-gen-code-2",
+            domain: "Coding / DSA",
+            topic: "Stacks & Queues",
+            difficulty: "Easy",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "Which data structure follows FIFO (First In, First Out)?",
+            options: ["Stack", "Queue", "Tree", "Heap"],
+            correctOption: 1,
+            explanation: "A queue removes items in the order they were inserted."
+        },
+        {
+            id: "pf-gen-code-3",
+            domain: "Coding / DSA",
+            topic: "Binary Search",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "What is the time complexity of binary search on a sorted array?",
+            options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+            correctOption: 1,
+            explanation: "Binary search halves the search interval each step, giving O(log n) time."
+        },
+        {
+            id: "pf-gen-code-4",
+            domain: "Coding / DSA",
+            topic: "Hashing",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "What is the average-case lookup time in a well-designed hash table?",
+            options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+            correctOption: 0,
+            explanation: "Hash tables typically provide average-case constant-time lookup, though worst-case can be O(n)."
+        },
+        {
+            id: "pf-gen-code-5",
+            domain: "Coding / DSA",
+            topic: "Recursion",
+            difficulty: "Medium",
+            isPYQ: false,
+            pyqLabel: "PrepForge Practice",
+            statement: "What is the purpose of a base case in recursion?",
+            options: ["To make the function call itself forever", "To stop recursive calls when a condition is met", "To sort all inputs", "To allocate a database"],
+            correctOption: 1,
+            explanation: "A base case terminates recursion and prevents unbounded recursive calls."
+        }
+,
+        {
+            "id": "pf-company-capgemini-1",
+            "domain": "Verbal",
+            "topic": "Subject-Verb Agreement",
+            "company": "capgemini",
+            "companyName": "Capgemini",
+            "difficulty": "Easy",
+            "isPYQ": false,
+            "pyqLabel": "Capgemini Practice Pattern",
+            "statement": "Neither the analyst nor the developers ___ available for the review.",
+            "options": [
+                "was",
+                "were",
+                "is",
+                "has been"
+            ],
+            "correctOption": 1,
+            "explanation": "With “neither…nor”, the verb agrees with the nearer subject. “Developers” is plural, so “were” is correct."
+        },
+        {
+            "id": "pf-company-capgemini-2",
+            "domain": "SQL",
+            "topic": "GROUP BY",
+            "company": "capgemini",
+            "companyName": "Capgemini",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Capgemini Practice Pattern",
+            "statement": "You need one row per department with its average salary. Which clause groups employee rows by department?",
+            "options": [
+                "ORDER BY department",
+                "GROUP BY department",
+                "HAVING department",
+                "DISTINCT department"
+            ],
+            "correctOption": 1,
+            "explanation": "GROUP BY department forms one group for each department so aggregate functions such as AVG(salary) can be applied."
+        },
+        {
+            "id": "pf-company-tech-mahindra-1",
+            "domain": "Aptitude",
+            "topic": "Averages",
+            "company": "tech-mahindra",
+            "companyName": "Tech Mahindra",
+            "difficulty": "Easy",
+            "isPYQ": false,
+            "pyqLabel": "Tech Mahindra Practice Pattern",
+            "statement": "The average of five numbers is 18. Four numbers are 12, 16, 20, and 22. What is the fifth number?",
+            "options": [
+                "18",
+                "20",
+                "22",
+                "24"
+            ],
+            "correctOption": 1,
+            "explanation": "The total must be 5 × 18 = 90. The four known numbers total 70, so the fifth is 20. Wait: 90 − 70 = 20."
+        },
+        {
+            "id": "pf-company-tech-mahindra-2",
+            "domain": "Coding / DSA",
+            "topic": "Array Complexity",
+            "company": "tech-mahindra",
+            "companyName": "Tech Mahindra",
+            "difficulty": "Easy",
+            "isPYQ": false,
+            "pyqLabel": "Tech Mahindra Practice Pattern",
+            "statement": "In a typical array, what is the time complexity of scanning every element once to find the maximum?",
+            "options": [
+                "O(1)",
+                "O(log n)",
+                "O(n)",
+                "O(n²)"
+            ],
+            "correctOption": 2,
+            "explanation": "Each of the n elements is inspected once, so the time complexity is O(n)."
+        },
+        {
+            "id": "pf-company-hcl-1",
+            "domain": "Reasoning",
+            "topic": "Number Series",
+            "company": "hcl",
+            "companyName": "HCL Technologies",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "HCL Technologies Practice Pattern",
+            "statement": "Find the next term: 2, 6, 12, 20, 30, __.",
+            "options": [
+                "36",
+                "40",
+                "42",
+                "44"
+            ],
+            "correctOption": 2,
+            "explanation": "The differences are 4, 6, 8, and 10. The next difference is 12, so 30 + 12 = 42."
+        },
+        {
+            "id": "pf-company-hcl-2",
+            "domain": "SQL",
+            "topic": "HAVING",
+            "company": "hcl",
+            "companyName": "HCL Technologies",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "HCL Technologies Practice Pattern",
+            "statement": "Which query clause filters departments after calculating COUNT(*) for each department?",
+            "options": [
+                "WHERE",
+                "HAVING",
+                "FROM",
+                "VALUES"
+            ],
+            "correctOption": 1,
+            "explanation": "HAVING filters groups after aggregation; WHERE filters individual rows before grouping."
+        },
+        {
+            "id": "pf-company-hcl-3",
+            "domain": "Coding / DSA",
+            "topic": "Linked Lists",
+            "company": "hcl",
+            "companyName": "HCL Technologies",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "HCL Technologies Practice Pattern",
+            "statement": "Which standard technique detects a cycle in a linked list using O(1) extra space?",
+            "options": [
+                "Binary search",
+                "Floyd’s slow-and-fast pointers",
+                "Merge sort",
+                "Prefix sums"
+            ],
+            "correctOption": 1,
+            "explanation": "Floyd’s cycle detection uses slow and fast pointers and requires O(1) extra space."
+        },
+        {
+            "id": "pf-company-hcl-4",
+            "domain": "Aptitude",
+            "topic": "Percentage Change",
+            "company": "hcl",
+            "companyName": "HCL Technologies",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "HCL Technologies Practice Pattern",
+            "statement": "A value increases by 25% and then decreases by 20%. Compared with the original, the final value is:",
+            "options": [
+                "5% higher",
+                "5% lower",
+                "Unchanged",
+                "10% higher"
+            ],
+            "correctOption": 2,
+            "explanation": "For an original value of 100: 100 × 1.25 × 0.80 = 100, so it is unchanged."
+        },
+        {
+            "id": "pf-company-ibm-1",
+            "domain": "DBMS",
+            "topic": "ACID Properties",
+            "company": "ibm",
+            "companyName": "IBM",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "IBM Practice Pattern",
+            "statement": "Which ACID property ensures that committed data remains saved even after a system failure?",
+            "options": [
+                "Atomicity",
+                "Consistency",
+                "Isolation",
+                "Durability"
+            ],
+            "correctOption": 3,
+            "explanation": "Durability means committed transaction changes persist despite failures."
+        },
+        {
+            "id": "pf-company-ibm-2",
+            "domain": "SQL",
+            "topic": "Joins",
+            "company": "ibm",
+            "companyName": "IBM",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "IBM Practice Pattern",
+            "statement": "Which join keeps every row from the left table and matching rows from the right table?",
+            "options": [
+                "INNER JOIN",
+                "LEFT JOIN",
+                "CROSS JOIN",
+                "SELF JOIN only"
+            ],
+            "correctOption": 1,
+            "explanation": "LEFT JOIN returns all left-table rows; unmatched right-side columns are NULL."
+        },
+        {
+            "id": "pf-company-ibm-3",
+            "domain": "Coding / DSA",
+            "topic": "Hash Tables",
+            "company": "ibm",
+            "companyName": "IBM",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "IBM Practice Pattern",
+            "statement": "What is the average lookup time in a well-distributed hash table?",
+            "options": [
+                "O(1)",
+                "O(log n)",
+                "O(n)",
+                "O(n log n)"
+            ],
+            "correctOption": 0,
+            "explanation": "A hash table usually offers average-case O(1) lookup, although worst-case performance can be O(n)."
+        },
+        {
+            "id": "pf-company-ibm-4",
+            "domain": "Reasoning",
+            "topic": "Logical Deduction",
+            "company": "ibm",
+            "companyName": "IBM",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "IBM Practice Pattern",
+            "statement": "Statements: All servers are computers. Some computers are portable. Which conclusion must be true?",
+            "options": [
+                "All servers are portable",
+                "Some servers are portable",
+                "All servers are computers",
+                "No computers are servers"
+            ],
+            "correctOption": 2,
+            "explanation": "The first statement directly guarantees that all servers are computers; no relationship between servers and portable computers is guaranteed."
+        },
+        {
+            "id": "pf-company-deloitte-1",
+            "domain": "SQL",
+            "topic": "Subqueries",
+            "company": "deloitte",
+            "companyName": "Deloitte",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Deloitte Practice Pattern",
+            "statement": "Which query correctly finds employees earning more than the average salary?",
+            "options": [
+                "SELECT * FROM Employees WHERE salary > AVG(salary);",
+                "SELECT * FROM Employees WHERE salary > (SELECT AVG(salary) FROM Employees);",
+                "SELECT AVG(salary) FROM Employees WHERE salary > salary;",
+                "SELECT salary FROM Employees HAVING salary > average;"
+            ],
+            "correctOption": 1,
+            "explanation": "The scalar subquery calculates the overall average, then the outer WHERE compares each employee salary to it."
+        },
+        {
+            "id": "pf-company-microsoft-1",
+            "domain": "Coding / DSA",
+            "topic": "Dynamic Programming",
+            "company": "microsoft",
+            "companyName": "Microsoft",
+            "difficulty": "Hard",
+            "isPYQ": false,
+            "pyqLabel": "Microsoft Practice Pattern",
+            "statement": "Dynamic programming is especially useful when a problem has which pair of properties?",
+            "options": [
+                "Sorted input and constant space",
+                "Overlapping subproblems and optimal substructure",
+                "Only negative numbers",
+                "No repeated states"
+            ],
+            "correctOption": 1,
+            "explanation": "Dynamic programming reuses results of overlapping subproblems and commonly relies on optimal substructure."
+        },
+        {
+            "id": "pf-company-zoho-1",
+            "domain": "Coding / DSA",
+            "topic": "Array Rotation",
+            "company": "zoho",
+            "companyName": "Zoho",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Zoho Practice Pattern",
+            "statement": "What is the time complexity of rotating an array by k positions using the reversal algorithm?",
+            "options": [
+                "O(1)",
+                "O(log n)",
+                "O(n)",
+                "O(n²)"
+            ],
+            "correctOption": 2,
+            "explanation": "The reversal algorithm reverses sections of the array a constant number of times, giving O(n) time."
+        },
+        {
+            "id": "pf-company-zoho-2",
+            "domain": "Aptitude",
+            "topic": "Ratios",
+            "company": "zoho",
+            "companyName": "Zoho",
+            "difficulty": "Easy",
+            "isPYQ": false,
+            "pyqLabel": "Zoho Practice Pattern",
+            "statement": "The ratio of two numbers is 4:7 and their sum is 55. What is the larger number?",
+            "options": [
+                "20",
+                "28",
+                "35",
+                "42"
+            ],
+            "correctOption": 2,
+            "explanation": "There are 11 total parts; each part is 55/11 = 5. The larger number is 7 × 5 = 35."
+        },
+        {
+            "id": "pf-company-zoho-3",
+            "domain": "SQL",
+            "topic": "Subqueries",
+            "company": "zoho",
+            "companyName": "Zoho",
+            "difficulty": "Hard",
+            "isPYQ": false,
+            "pyqLabel": "Zoho Practice Pattern",
+            "statement": "Which approach can return the second-highest distinct salary from Employees?",
+            "options": [
+                "SELECT MIN(salary) FROM Employees",
+                "SELECT MAX(salary) FROM Employees WHERE salary < (SELECT MAX(salary) FROM Employees)",
+                "SELECT COUNT(*) FROM Employees",
+                "SELECT salary FROM Employees GROUP BY name"
+            ],
+            "correctOption": 1,
+            "explanation": "The subquery gets the maximum salary; the outer MAX finds the greatest salary below that value."
+        },
+        {
+            "id": "pf-company-flipkart-1",
+            "domain": "Coding / DSA",
+            "topic": "Sliding Window",
+            "company": "flipkart",
+            "companyName": "Flipkart",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Flipkart Practice Pattern",
+            "statement": "For finding the maximum sum of any contiguous subarray of fixed length k, a sliding window can process the array in:",
+            "options": [
+                "O(n) time",
+                "O(n²) time always",
+                "O(log n) time",
+                "O(1) time regardless of n"
+            ],
+            "correctOption": 0,
+            "explanation": "After computing the first window, each step removes one value and adds one value, so the scan is O(n)."
+        },
+        {
+            "id": "pf-company-flipkart-2",
+            "domain": "Reasoning",
+            "topic": "Logical Sequence",
+            "company": "flipkart",
+            "companyName": "Flipkart",
+            "difficulty": "Easy",
+            "isPYQ": false,
+            "pyqLabel": "Flipkart Practice Pattern",
+            "statement": "A delivery route visits A before B, B before C, and C before D. Which location must be visited after B?",
+            "options": [
+                "A",
+                "C",
+                "A and D immediately",
+                "None can be inferred"
+            ],
+            "correctOption": 1,
+            "explanation": "The stated ordering directly places C after B and before D."
+        },
+        {
+            "id": "pf-company-flipkart-3",
+            "domain": "SQL",
+            "topic": "Window Functions",
+            "company": "flipkart",
+            "companyName": "Flipkart",
+            "difficulty": "Hard",
+            "isPYQ": false,
+            "pyqLabel": "Flipkart Practice Pattern",
+            "statement": "Which window function assigns consecutive row numbers without ties, even when salary values are equal?",
+            "options": [
+                "RANK()",
+                "DENSE_RANK()",
+                "ROW_NUMBER()",
+                "COUNT()"
+            ],
+            "correctOption": 2,
+            "explanation": "ROW_NUMBER() assigns a unique sequential number to each row in the window ordering."
+        },
+        {
+            "id": "pf-company-walmart-1",
+            "domain": "Aptitude",
+            "topic": "Weighted Average",
+            "company": "walmart",
+            "companyName": "Walmart",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Walmart Practice Pattern",
+            "statement": "A student scores 70 in a test weighted 40% and 80 in a test weighted 60%. What is the weighted score?",
+            "options": [
+                "74",
+                "75",
+                "76",
+                "78"
+            ],
+            "correctOption": 2,
+            "explanation": "Weighted score = 70 × 0.4 + 80 × 0.6 = 28 + 48 = 76."
+        },
+        {
+            "id": "pf-company-walmart-2",
+            "domain": "Coding / DSA",
+            "topic": "Heaps",
+            "company": "walmart",
+            "companyName": "Walmart",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Walmart Practice Pattern",
+            "statement": "Which data structure is commonly used to maintain the largest k elements efficiently in a stream?",
+            "options": [
+                "A min-heap of size k",
+                "A stack only",
+                "A queue only",
+                "A linked list without ordering"
+            ],
+            "correctOption": 0,
+            "explanation": "A min-heap of size k keeps the smallest of the retained top-k elements at the root for efficient replacement."
+        },
+        {
+            "id": "pf-company-walmart-3",
+            "domain": "DBMS",
+            "topic": "Normalization",
+            "company": "walmart",
+            "companyName": "Walmart",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Walmart Practice Pattern",
+            "statement": "A table has a composite key (student_id, course_id); student_name depends only on student_id. Which issue does this illustrate?",
+            "options": [
+                "Transitive dependency only",
+                "Partial dependency",
+                "No functional dependency",
+                "Referential integrity"
+            ],
+            "correctOption": 1,
+            "explanation": "A non-key attribute depending on only part of a composite key is a partial dependency, addressed by 2NF."
+        },
+        {
+            "id": "pf-company-walmart-4",
+            "domain": "SQL",
+            "topic": "Aggregation",
+            "company": "walmart",
+            "companyName": "Walmart",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Walmart Practice Pattern",
+            "statement": "Which query returns only departments whose average salary is greater than 60000?",
+            "options": [
+                "SELECT department FROM Employees WHERE AVG(salary)>60000 GROUP BY department;",
+                "SELECT department FROM Employees GROUP BY department HAVING AVG(salary)>60000;",
+                "SELECT department FROM Employees ORDER BY AVG(salary)>60000;",
+                "SELECT department FROM Employees HAVING salary>60000;"
+            ],
+            "correctOption": 1,
+            "explanation": "GROUP BY forms department groups and HAVING filters those groups by their average salary."
+        },
+        {
+            "id": "pf-company-meesho-1",
+            "domain": "Coding / DSA",
+            "topic": "Intervals",
+            "company": "meesho",
+            "companyName": "Meesho",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Meesho Practice Pattern",
+            "statement": "After sorting intervals by start time, what is the usual time complexity of merging overlapping intervals?",
+            "options": [
+                "O(1)",
+                "O(log n)",
+                "O(n)",
+                "O(n log n)"
+            ],
+            "correctOption": 3,
+            "explanation": "Sorting takes O(n log n); the merge scan is O(n), so the overall time is O(n log n)."
+        },
+        {
+            "id": "pf-company-meesho-2",
+            "domain": "SQL",
+            "topic": "Indexes",
+            "company": "meesho",
+            "companyName": "Meesho",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Meesho Practice Pattern",
+            "statement": "What is a common trade-off when adding an index to a database table?",
+            "options": [
+                "Reads may improve, but writes and storage can cost more",
+                "Every query becomes faster at no cost",
+                "Indexes remove the need for primary keys",
+                "Indexes automatically normalize the table"
+            ],
+            "correctOption": 0,
+            "explanation": "Indexes can speed up suitable reads but require storage and maintenance during inserts, updates, and deletes."
+        },
+        {
+            "id": "pf-company-meesho-3",
+            "domain": "Reasoning",
+            "topic": "Number Series",
+            "company": "meesho",
+            "companyName": "Meesho",
+            "difficulty": "Easy",
+            "isPYQ": false,
+            "pyqLabel": "Meesho Practice Pattern",
+            "statement": "Find the missing number: 5, 10, 20, 40, __.",
+            "options": [
+                "45",
+                "60",
+                "70",
+                "80"
+            ],
+            "correctOption": 3,
+            "explanation": "Each term doubles, so 40 × 2 = 80."
+        },
+        {
+            "id": "pf-company-meesho-4",
+            "domain": "Verbal",
+            "topic": "Reading Comprehension",
+            "company": "meesho",
+            "companyName": "Meesho",
+            "difficulty": "Medium",
+            "isPYQ": false,
+            "pyqLabel": "Meesho Practice Pattern",
+            "statement": "A notice says, “Orders placed before noon are usually dispatched the same day.” Which statement is supported?",
+            "options": [
+                "Every order is delivered the same day.",
+                "Orders placed before noon are usually dispatched that day.",
+                "Orders after noon are always cancelled.",
+                "Dispatch and delivery mean the same thing."
+            ],
+            "correctOption": 1,
+            "explanation": "The notice says usually dispatched the same day; it does not guarantee delivery or make claims about cancellation."
+        }
     ],
 
     // Mock Tests Series
@@ -2986,6 +3880,7 @@ const PREPFORGE_DATA = {
     resources: [
         {
             id: "res-1",
+            url: "https://www.indiabix.com/aptitude/questions-and-answers/",
             category: "Aptitude",
             title: "Complete Quantitative Aptitude Formula Playbook",
             author: "PrepForge Academic Team",
@@ -2997,6 +3892,7 @@ const PREPFORGE_DATA = {
         },
         {
             id: "res-2",
+            url: "https://www.geeksforgeeks.org/dsa/",
             category: "Coding / DSA",
             title: "Top 75 Placement DSA Patterns & Complexity Sheet",
             author: "PrepForge Tech Leads",
@@ -3008,6 +3904,7 @@ const PREPFORGE_DATA = {
         },
         {
             id: "res-3",
+            url: "https://sqlbolt.com/",
             category: "SQL",
             title: "SQL Query Master Handbook: Joins to Window Functions",
             author: "Senior Database Architect",
@@ -3019,6 +3916,7 @@ const PREPFORGE_DATA = {
         },
         {
             id: "res-4",
+            url: "https://www.geeksforgeeks.org/dbms/",
             category: "DBMS",
             title: "DBMS Architecture, Normalization & ACID Quick Notes",
             author: "CS Faculty Review",
@@ -3030,6 +3928,7 @@ const PREPFORGE_DATA = {
         },
         {
             id: "res-5",
+            url: "https://www.themuse.com/advice/star-interview-method",
             category: "Interview Preparation",
             title: "Campus HR & Technical Interview Master Guide (STAR Method)",
             author: "Former Campus Hiring Panel",
@@ -3041,6 +3940,7 @@ const PREPFORGE_DATA = {
         },
         {
             id: "res-6",
+            url: "https://www.geeksforgeeks.org/company-preparation/",
             category: "Company Preparation",
             title: "TCS, Infosys, Accenture & Amazon Campus Strategy Roadmap",
             author: "PrepForge Placement Cell",
@@ -3050,6 +3950,43 @@ const PREPFORGE_DATA = {
             description: "Detailed syllabus breakdown, cut-off score thresholds, previous year question trends, and technical round expectations for top recruiters.",
             content: "Features:\n1. Round-by-round time budgeting for online assessment platforms\n2. Test interface shortcuts and scratch-pad strategies\n3. Code submission and edge-case testing checklist\n4. Document verification and pre-onboarding formalities."
         }
+        ,{
+            id: "res-7",
+            url: "https://www.indiabix.com/logical-reasoning/questions-and-answers/",
+            category: "Logical Reasoning",
+            title: "Logical Reasoning Practice Workbook",
+            author: "PrepForge Academic Team",
+            pages: "Online practice",
+            format: "Question Bank",
+            readTime: "30 mins",
+            description: "Practice series, coding-decoding, directions, blood relations, syllogisms, seating arrangements, and statement-based reasoning.",
+            content: "Study plan:\n1. Number and letter series\n2. Coding-decoding and analogy\n3. Direction sense and blood relations\n4. Syllogisms and Venn diagrams\n5. Seating arrangements and data sufficiency."
+        },
+        {
+            id: "res-8",
+            url: "https://www.indiabix.com/verbal-ability/questions-and-answers/",
+            category: "Verbal English",
+            title: "Verbal English & Grammar Practice",
+            author: "PrepForge Language Team",
+            pages: "Online practice",
+            format: "Question Bank",
+            readTime: "25 mins",
+            description: "Improve grammar, sentence correction, vocabulary, fill-in-the-blanks, para jumbles, and reading comprehension.",
+            content: "Study plan:\n1. Subject-verb agreement and tenses\n2. Articles and prepositions\n3. Synonyms, antonyms, and contextual vocabulary\n4. Sentence correction and para jumbles\n5. Reading comprehension and inference."
+        },
+        {
+            id: "res-9",
+            url: "https://www.geeksforgeeks.org/difference-between-sql-and-dbms/",
+            category: "DBMS",
+            title: "SQL vs DBMS: Understand the Difference",
+            author: "PrepForge CS Notes",
+            pages: "Quick guide",
+            format: "Concept Notes",
+            readTime: "15 mins",
+            description: "Understand why SQL and a DBMS are different and why both concepts matter in placement interviews.",
+            content: "Key idea:\nSQL is a language for defining, querying, and manipulating relational data. A DBMS is the software that stores and manages databases, enforces permissions and constraints, handles concurrent access, and processes SQL statements. SQL does not replace the database management system."
+        }
+
     ]
 };
 
